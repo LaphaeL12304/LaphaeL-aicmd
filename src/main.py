@@ -29,7 +29,7 @@ readme_for_AI_path = os.path.join(project_root, "data", "README_for_AI.txt")
 custom_instruct_path = os.path.join(project_root, "data", "custom_instruct.txt")
 
 # 配置API密钥
-api_key = "AIzaSyDCww2cLUMf6dL5AgX9fICvCa95o8tEqXA"
+api_key = "Your-API-Key"
 genai.configure(api_key=api_key)
 # 初始化Gemini模型
 model = genai.GenerativeModel('gemini-pro')
