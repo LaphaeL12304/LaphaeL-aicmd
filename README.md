@@ -28,6 +28,10 @@
   * ### 在文件末尾添加自定义命令：
   * ```alias aicmd="cd ~ && main.py在你计算机上的路径"```
 
+## 设置API
+ * 找到main.py中的第32行，将API改为你的gemini API（可以从google aistudio免费获取）
+ * ```api_key = "Your-API-Key"```
+
 ## 启动
   * 从终端输入"aicmd"即可启动程序
   * 请确保你的网络环境可以连接到gemini
