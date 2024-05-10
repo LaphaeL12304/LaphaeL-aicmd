@@ -28,9 +28,12 @@
   * ### 在文件末尾添加自定义命令：
   * ```alias aicmd="cd ~ && main.py在你计算机上的路径"```
 
+  * ### 更新文件：
+  * ```source ~/.bashrc```
+
 ## 设置API
- * 找到main.py中的第32行，将API改为你的gemini API（可以从google aistudio免费获取）
- * ```api_key = "Your-API-Key"```
+ * 找到**main.py**中的第59行，将API改为你的gemini API（可以从google aistudio免费获取）
+ * ```chat_ai.api = "Your-API-Key"```
 
 ## 启动
   * 从终端输入"aicmd"即可启动程序
@@ -40,5 +43,8 @@
   * 输入 '/cmd the_command' 以手动执行'the command'
   * 输入不以'/'开头的文本，则文本会自动发送给AI
 
+# 更新内容: v1.1.1
+ * 整理代码，初步模块化
 
 # 已知bug
+ * 运行`echo`命令时，如果内容包含小括号，即'('或')'，比如`echo ~/test.py "print("hello world")"`,那么执行时会报错
