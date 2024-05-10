@@ -30,6 +30,7 @@ import _print_spoker as sp
 import _user_confirm
 import slow_print
 import execute_cmd as cmd
+import chat_gemini
 
 
 
@@ -38,7 +39,7 @@ project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 instruction_prompt_path = os.path.join(project_root, "data", "instruction_prompt.txt")
 custom_instruct_path = os.path.join(project_root, "data", "custom_instruct.txt")
 
-
+'''
 # 配置API密钥
 api_key = "AIzaSyCqtL5k-UdyW3ff2Kkiovz7JpnegySUBaI"
 genai.configure(api_key=api_key)
@@ -46,7 +47,7 @@ genai.configure(api_key=api_key)
 # 初始化Gemini模型
 model = genai.GenerativeModel('gemini-pro')
 chat = model.start_chat(history=[])
-
+'''
 
 #声明程序信息
 program_name = _color_string.Color_str("AIcmd", "purple", "bold")
@@ -61,6 +62,10 @@ print_sp = sp.print_spoker(program_name)
 def spoke(name = program_name):
     print_sp(name)
     print_history.add(name.raw + ": ")
+
+chat_ai = chat_gemini.chat_AI_gemini("Gemini", 'gemini-pro')
+chat_ai.api = "Your-API-Key"
+chat_ai.initialize()
 
 
 # 声明变量
@@ -77,7 +82,7 @@ def extract_command(text):
     return match.group(1) if match else ""  # 如果没有匹配项则返回空
 
 
-
+'''
 def interact_with_gemini(chat, ai_input):
     """与Gemini API进行对话，并利用流式传输逐字打印回答"""
     spoke(ai_name)
@@ -88,7 +93,7 @@ def interact_with_gemini(chat, ai_input):
         ai_text += chunk.text
     print_history.add_line("#省略AI的回答")
     return ai_text.strip()
-
+'''
 
 
 def read_file(file_path):
@@ -211,7 +216,8 @@ def initialize():
         "\nhome目录下的文件: " + ls_home + \
         "\n)\n" + custom_instruct +\
         "\n如果你能理解以上要求，请回复\"准备就绪\"。"
-    ai_output = interact_with_gemini(chat, init_prompt)
+    ai_output = chat_ai.interact(init_prompt, print_history, print_sp)
+    # ai_output = interact_with_gemini(chat, init_prompt)
     if not ("准备就绪" in ai_output.lower() or "ready" in ai_output.lower()):
         sys.exit("连接失败或AI无法理解要求")
 
@@ -244,7 +250,8 @@ def main():
 
         else: #控制权在AI
             # print(print_history.text) # 查看向AI发送的历史记录，仅调试用
-            ai_output = interact_with_gemini(chat, print_history.text) # 与AI交互
+            ai_output = chat_ai.interact(print_history.text, print_history, print_sp)
+            # ai_output = interact_with_gemini(chat, print_history.text) # 与AI交互
             ai_output_command = extract_command(ai_output)
             print_history.clear()
 
