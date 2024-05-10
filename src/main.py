@@ -39,15 +39,7 @@ project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 instruction_prompt_path = os.path.join(project_root, "data", "instruction_prompt.txt")
 custom_instruct_path = os.path.join(project_root, "data", "custom_instruct.txt")
 
-'''
-# 配置API密钥
-api_key = "AIzaSyCqtL5k-UdyW3ff2Kkiovz7JpnegySUBaI"
-genai.configure(api_key=api_key)
 
-# 初始化Gemini模型
-model = genai.GenerativeModel('gemini-pro')
-chat = model.start_chat(history=[])
-'''
 
 #声明程序信息
 program_name = _color_string.Color_str("AIcmd", "purple", "bold")
@@ -81,19 +73,6 @@ def extract_command(text):
     match = re.search(pattern, text)  # 查找第一个匹配项
     return match.group(1) if match else ""  # 如果没有匹配项则返回空
 
-
-'''
-def interact_with_gemini(chat, ai_input):
-    """与Gemini API进行对话，并利用流式传输逐字打印回答"""
-    spoke(ai_name)
-    response = chat.send_message(ai_input, stream=True)
-    ai_text = ""
-    for chunk in response:
-        slow_print.slow_print(_color_string.set_color(chunk.text, state="bold"))
-        ai_text += chunk.text
-    print_history.add_line("#省略AI的回答")
-    return ai_text.strip()
-'''
 
 
 def read_file(file_path):
