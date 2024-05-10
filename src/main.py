@@ -23,29 +23,47 @@ import sys
 import re
 import os
 
+
+import record_history
+import _color_string
+import _print_spoker as sp
+import _user_confirm
+import slow_print
+import execute_cmd as cmd
+
+
+
 # 声明路径
 project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-readme_for_AI_path = os.path.join(project_root, "data", "README_for_AI.txt")
+instruction_prompt_path = os.path.join(project_root, "data", "instruction_prompt.txt")
 custom_instruct_path = os.path.join(project_root, "data", "custom_instruct.txt")
 
+
 # 配置API密钥
-api_key = "Your-API-Key"
+api_key = "AIzaSyCqtL5k-UdyW3ff2Kkiovz7JpnegySUBaI"
 genai.configure(api_key=api_key)
+
 # 初始化Gemini模型
 model = genai.GenerativeModel('gemini-pro')
 chat = model.start_chat(history=[])
 
+
 #声明程序信息
-program_name = "\033[35;1maicmd\033[0m"
-ai_name = "\033[34;1mGemini\033[0m"
+program_name = _color_string.Color_str("AIcmd", "purple", "bold")
+ai_name = _color_string.Color_str("Gemini", "blue", "bold")
 
-password_prompt = 'password:'
-password_prompt_zh = '密码：' # 系统的密码提示符
 
-print_history = ""
+# 实例化
+print_history = record_history.History()
+current_command = cmd.Command(program_name.text)
+print_sp = sp.print_spoker(program_name)
 
-slow_print_enter = 0
+def spoke(name = program_name):
+    print_sp(name)
+    print_history.add(name.raw + ": ")
 
+
+# 声明变量
 pwd_path = ""
 ls_home = ""
 system_version = ""
@@ -60,56 +78,17 @@ def extract_command(text):
 
 
 
-def slow_print(text, delay=0.002, enter=True):
-    """逐字打印文本，每个字之间延时 delay 秒"""
-    global slow_print_enter
-    for char in text:
-        if char == "\n":
-            if slow_print_enter >= 2: # 清除连续换行
-                continue
-            slow_print_enter += 1
-            print("", flush=True) # 打印换行
-        elif char not in ("*", "`"):  # 检查字符是否是要跳过的字符
-            print(char, end='', flush=True)
-            slow_print_enter = 0
-            time.sleep(delay)
-    if enter:
-        print()  # 打印换行
-    slow_print_enter = 0
-
-
-def print_spoker(printer_name = program_name):
-    """打印发言人"""
-    global last_printer, print_history
-    if printer_name != last_printer:
-        slow_print(printer_name + ": ", enter=False)
-        print_history += printer_name[7:-4] + ": "
-    last_printer = printer_name
-
-
-
 def interact_with_gemini(chat, ai_input):
     """与Gemini API进行对话，并利用流式传输逐字打印回答"""
-    global print_history
-    print_spoker(ai_name)
+    spoke(ai_name)
     response = chat.send_message(ai_input, stream=True)
     ai_text = ""
     for chunk in response:
-        slow_print("\033[36;1m" + chunk.text + "\033[0m")
+        slow_print.slow_print(_color_string.set_color(chunk.text, state="bold"))
         ai_text += chunk.text
-    print_history += "#省略AI的回答\n"
+    print_history.add_line("#省略AI的回答")
     return ai_text.strip()
 
-
-def confirm(printstr = "是否同意?"):
-    """打印[Y/n]确认界面"""
-    global print_history
-    print_spoker()
-    slow_print(printstr, enter=False)
-    t = "[Y/n]"
-    result = input(t)
-    print_history += printstr + t + result + "\n"
-    return True if result.lower() == 'y' or (not result) else False # 如果输入y或无输入，则返回True
 
 
 def read_file(file_path):
@@ -125,106 +104,78 @@ def read_file(file_path):
         except Exception as e:
             return f"///{str(e)}"
 
-    
-
-def execute_command(command_raw, need_confirm = True):
-    """执行命令"""
-    global print_history, pwd_path
-    command = command_raw.replace('~', pwd_path) # 将'~'替换为当前目录
-    # 如果命令包含sudo，则需要确认
-    if ('sudo' in command) or need_confirm:
-        confirm_state = confirm(f"是否执行命令 \033[35;1m\"{command}\"\033[0m ？")
-        if not confirm_state:
-            return "///用户拒绝执行命令。"
-    
-    child = pexpect.spawn(f'/bin/bash -c "{command}"', encoding='utf-8')
-    try:
-        passretry = False # 重置重试次数
-        while True:
-            i = child.expect([password_prompt, password_prompt_zh, pexpect.EOF, \
-                pexpect.TIMEOUT], timeout=10)
-            match i:  # 等待密码提示
-                case 0 | 1:
-                    if passretry:
-                        t = "密码错误，请再次尝试："
-                        password = getpass.getpass(t)
-                        print_history += t + "\n"
-                    else:
-                        t = "请输入管理员密码："
-                        password = getpass.getpass(t)
-                        print_history += t + "\n"
-                    passretry = True
-                    child.sendline(password)
-                case 2:  # EOF，命令执行完成
-                    return child.before.strip()
-                case 3:  # 超时
-                    return "///命令执行超时。"
-
-    except pexpect.exceptions.EOF: # 子进程被异常终止
-        return "///子进程被异常终止。"
-    except Exception as e: # 发生异常
-        return f"///发生异常 - {str(e)}"
 
 
 def match_instruction(instruction):
     """处理用户输入的指令"""
-    global print_history
 
     if instruction.startswith('/cmd '):
-        system_output = execute_command(instruction[5:], False) # 执行此命令命令
-        if system_output.startswith('///'): # 命令执行异常
-            print_spoker(program_name)
-            slow_print(system_output[3:]) # 打印异常信息
-            print_history += system_output[3:] + "\n"
-        else:
-            print_spoker(system_name)
-            slow_print(system_output) # 打印命令执行结果
-            print_history += system_output + "\n"
+        try:
+            current_command.text = instruction[5:]
+            system_output = current_command.execute(False) # 执行此命令命令
+            spoke(system_name)
+            slow_print.slow_print(system_output) # 打印命令执行结果
+            print_history.add_line(system_output)
+        except Exception as e:
+            spoke()
+            slow_print.slow_print(str(e)) # 打印异常信息
+            print_history.add_line(str(e))
+    
     else:
-        print_spoker(program_name)
+        spoke()
         match instruction: # 如果用户输入以'/'开头，则匹配用户输入
             case "/exit" | "/退出": # 退出程序
-                slow_print("正在退出程序...")
+                slow_print.slow_print("正在退出程序...")
                 sys.exit(0)
             case "/help" | "/帮助" | "/": # 打印帮助文本
-                print_spoker(program_name)
+                spoke()
                 t = "这是帮助文本，暂时没写"
-                slow_print(t)
-                print_history += t + "\n"
+                slow_print.slow_print(t)
+                print_history.add_line(t)
             case "/history" | "/历史": # 打印历史记录
-                print_spoker(program_name)
-                slow_print("以下是历史记录：\n" + print_history)
-                print_history += "#省略历史记录打印\n"
+                spoke()
+                slow_print.slow_print("以下是历史记录：\n" + print_history.text)
+                print_history.add_line("#省略历史记录打印")
             case "/clear" | "/清空": # 清空历史记录
-                print_history = ""
-                print_spoker(program_name)
-                t = "历史记录已清空"
-                slow_print(t)
-                print_history += t + "\n"
+                print_history.clear()
+                spoke()
+                slow_print.slow_print("历史记录已清空")
             case _: # 其他情况
-                print_spoker(program_name)
+                spoke()
                 t = "无效指令"
-                slow_print(t)
-                print_history += t + "\n"
+                slow_print.slow_print(t)
+                print_history.add_line(t)
     
 
-def init():
+
+def initialize():
     """初始化"""
-    slow_print(program_name + ": 正在初始化...")
+    slow_print.slow_print(program_name.text + ": 正在初始化...")
 
     # 初始化变量
-    global slow_print_enter, last_printer, print_history
     global pwd_path, ls_home, system_version
-    global system_name_raw, user_name_raw, system_name, user_name
-    slow_print_enter = 0
+    global system_name, user_name
+    slow_print.slow_print_enter = 0
     last_printer = ""
-    print_history = ""
+    print_history.clear()
 
-    slow_print("正在获取系统信息...")
+    slow_print.slow_print("正在获取系统信息...")
     # 获取计算机信息
-    pwd_path = execute_command("pwd", False)
-    ls_home = execute_command("ls", False)
-    result = execute_command("lsb_release -a", False)
+    try:
+        current_command.text = "pwd"
+        pwd_path = current_command.execute(False)
+        current_command.text = "ls"
+        ls_home = current_command.execute(False)
+        current_command.text = "whoami"
+        user_name = _color_string.Color_str(current_command.execute(False), "green", "bold")
+        current_command.text = "lsb_release -a"
+        result = current_command.execute(False)
+    except Exception as e:
+        spoke()
+        sys.exit("获取信息失败："+ str(e))
+
+    print(pwd_path)
+    print(ls_home)
 
     system_version = "System verison unkown"
     for line in result.split('\n'):
@@ -232,56 +183,59 @@ def init():
                 # 获取干净的系统信息
                 system_version = line.split(':')[1].strip()
                 break
-    system_name_raw = system_version.split()[0]
-    user_name_raw = execute_command("whoami", False)
-    system_name = "\033[33;1m" + system_name_raw + "\033[0m"
-    user_name = "\033[32;1m" + user_name_raw + "\033[0m"
+    system_name = _color_string.Color_str(system_version.split()[0], "yellow", "bold")
+    
 
 
-    slow_print("正在获取配置文件...")
+    slow_print.slow_print("正在获取配置文件...")
     # 读取文件
-    readme_for_AI = read_file(readme_for_AI_path)
+    instruction_prompt = read_file(instruction_prompt_path)
     custom_instruct = read_file(custom_instruct_path)
 
-    if readme_for_AI.startswith("///"):
-        sys.exit("'README_for_AI.txt'读取错误：" + readme_for_AI[3:])
-    elif not readme_for_AI:
-        sys.exit("'README_for_AI.txt'为空")
+    if instruction_prompt.startswith("///"):
+        sys.exit("'instruction_prompt.txt'读取错误：" + instruction_prompt[3:])
+    elif not instruction_prompt:
+        sys.exit("'instruction_prompt.txt'为空")
     elif custom_instruct.startswith("///"):
         sys.exit("'custom_instruct.txt'读取错误：" + custom_instruct[3:])
     elif not custom_instruct:
         sys.exit("'custom_instruct.txt'为空")
 
+
     # 连接AI
-    slow_print("正在尝试连接到\"" + ai_name + "\"...")
-    init_prompt = readme_for_AI + \
+    slow_print.slow_print("正在尝试连接到\"" + ai_name.raw + "\"...")
+    init_prompt = instruction_prompt + \
         "\n以下是用户计算机信息:\n(" + \
         "\n系统版本: " + system_version+ \
-        "\n用户名: " + user_name + \
+        "\n用户名: " + user_name.raw + \
         "\nhome目录下的文件: " + ls_home + \
         "\n)\n" + custom_instruct +\
         "\n如果你能理解以上要求，请回复\"准备就绪\"。"
     ai_output = interact_with_gemini(chat, init_prompt)
     if not ("准备就绪" in ai_output.lower() or "ready" in ai_output.lower()):
         sys.exit("连接失败或AI无法理解要求")
-    print_spoker(program_name)
-    slow_print("连接成功！\"" + ai_name[7:-4] + "\"已经理解程序要求")
+
     
-    slow_print("\"" + program_name[7:-4] + "\"已准备就绪！\n")
+
+    spoke()
+    slow_print.slow_print("连接成功！\"" + ai_name.raw + "\"已经理解程序要求")
+    
+    slow_print.slow_print("\"" + program_name.raw + "\"已准备就绪！\n")
+    print_history.clear()
+
 
 
 def main():
 
-    global print_history
-    init()
+    initialize()
 
     control_on_user = True # 控制权在用户
     while True:
 
         if control_on_user: # 控制权在用户
-            print_spoker(user_name) # 打印用户信息
+            spoke(user_name) # 打印用户信息
             user_input = input() # 接收用户输入
-            print_history += user_input + "\n" # 记录用户输入
+            print_history.add_line(user_input)# 记录用户输入
             # 处理用户输入
             if user_input.startswith('/'):
                 match_instruction(user_input)
@@ -289,20 +243,23 @@ def main():
                 control_on_user = False # 控制权在AI
 
         else: #控制权在AI
-            ai_output = interact_with_gemini(chat, print_history) # 与AI交互
+            # print(print_history.text) # 查看向AI发送的历史记录，仅调试用
+            ai_output = interact_with_gemini(chat, print_history.text) # 与AI交互
             ai_output_command = extract_command(ai_output)
-            print_history = "" # 清空历史记录
+            print_history.clear()
 
             if ai_output_command:
-                system_output = execute_command(ai_output_command) # 执行AI输出的命令
-                if system_output.startswith('///'): # 命令执行异常
-                    print_spoker(program_name)
-                    slow_print(system_output[3:]) # 打印异常信息
-                    print_history += system_output[3:] + "\n"
-                else:
-                    print_spoker(system_name)
-                    slow_print(system_output) # 打印命令执行结果
-                    print_history += system_output + "\n"
+                try:
+                    current_command.text = ai_output_command # 将AI输出的命令赋值给当前命令
+                    system_output = current_command.execute() # 执行当前命令
+                    spoke(system_name)
+                    slow_print.slow_print(system_output) # 打印命令执行结果
+                    print_history.add_line(system_output)
+                except Exception as e:
+                    spoke()
+                    slow_print.slow_print(str(e)) # 打印异常信息
+                    print_history.add_line(str(e))
+
             else:
                 control_on_user = True
 
