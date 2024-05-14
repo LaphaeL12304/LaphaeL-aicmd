@@ -47,7 +47,7 @@
    `nano ~/.bashrc`
 2. Add a custom command at the end of the file:  
    `alias aicmd="cd ~ && python3 path_to_program_on_your_computer/src/main.py"`
-3. Execute the following command to apply change:
+3. Execute the following command to apply change:  
    `source ~/.bashrc`
 
 #### Set up API:
