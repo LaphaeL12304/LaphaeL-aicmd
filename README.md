@@ -1,48 +1,92 @@
-# 简介
-  * **注意！尽管程序要求用户确认指令才能执行，但很难保证不会出什么bug，因此请不要在有重要资料的系统上运行**
-  * aicmd-linux的目标是使用户摆脱敲命令，实现真正的自然语言操作linux系统
-  * 目前该程序处于**早期阶段**，bug还很多，并且只测试了Ubuntu 22.04.4 LTS发行版上的运行
+# LaphaeLaicmd-linux
 
+- Enable AI to execute Linux commands on the user's computer
 
-# 特性
-  * 目前仅支持gemini
-  * 自动获取AI响应中的linux命令
-  * 执行前向用户确认
+---
 
+# [简体中文](https://github.com/LaphaeL12304/LaphaeLaicmd-linux/blob/main/README_zh.md) | English
 
-# 安装
+## Update V1.2.0
 
-## 依赖库：
-  * ### pexpect库
-  * 用于执行linux命令，可通过以下命令安装：
-  * ```pip install pexpect```
+1. Supports capturing and processing Linux commands that require `[Y/n]` interaction
+2. Commands are now executed with real-time output, not waiting for the end of execution (EOF)
+3. Code restructured
 
-  * ### google-generativeai库
-  * 如果使用gemini模型，则需要使用这个库，可以通过以下命令安装：
-  * ```pip install -q -U google-generativeai```
+> [!WARNING]
+>
+> - **Attention! Although this program requires user confirmation before executing Linux commands, it is difficult to guarantee that there will be no bugs, so please do not run this program on systems with important data**
+> - This program is still in an **early stage**, has many bugs, and has only been tested on Ubuntu 22.04.4 LTS distribution
 
-## 添加linux自定义命令：
-  * ### 在linux终端执行以下命令打开文件：
-  * ```nano ~/.bashrc```
+## Features
 
-  * ### 在文件末尾添加自定义命令：
-  * ```alias aicmd="cd ~ && main.py在你计算机上的路径"```
+- Type `aicmd` in the Linux terminal to start
+- Automatically captures Linux commands from AI responses
+- Confirms with the user before executing commands
+- AI can perform complex tasks step-by-step
+- Currently only supports Gemini, planning to add ChatGPT, and considering supporting Ollama local model in the future
 
-## 设置API
-  * 找到`config.py`中的第55行，将API改为你的gemini API（可以从google aistudio免费获取）
-  * ```api_key = "Your-API-Key"```
+## Installation
 
-## 启动
-  * 从终端输入`aicmd`即可启动程序
-  * 请确保你的网络环境可以连接到gemini
-  * 输入 '/' 或 '/help' 或 '/帮助' 查看使用说明
-  * 输入 '/exit' 或 '/退出' 以退出程序
-  * 输入 '/cmd the_command' 以手动执行'the command'
-  * 输入不以'/'开头的文本，则文本会自动发送给AI
+#### Download the program:
 
-# 更新内容 (v1.2.0)
-  * 重新布局代码
-  * execute_command()函数改为实时打印输出，并可以捕获并处理"[Y\n]"确认信息
-  * 试试输入`帮我下载chrome`,`帮我删除vscode`等！
+- [Github download link](https://github.com/LaphaeL12304/LaphaeLaicmd-linux/archive/refs/heads/main.zip)
 
-# 已知bug
+#### Python dependencies:
+
+1. pexpect module
+   - This module is used to execute Linux commands and can be installed with the following command:  
+     `pip install pexpect`
+
+2. google-generativeai module
+   - If using the Gemini model, this module is required, and can be installed with:  
+     `pip install -q -U google-generativeai`
+
+#### Add custom Linux command:
+
+1. Execute the following command in the Linux terminal to open the file:  
+   `nano ~/.bashrc`
+2. Add a custom command at the end of the file:  
+   `alias aicmd="cd ~ && python3 path_to_program_on_your_computer/src/main.py"`
+
+#### Set up API:
+
+- Locate **line 55** in `src/config.py`, change the `api_key` to your Gemini API (can be obtained for free from google aistudio)  
+  `api_key = "Your-API-Key"`
+
+#### Launch:
+
+- Start the program by typing `aicmd` in the terminal
+- Ensure your network environment can connect to Gemini
+
+## Usage Tutorial
+
+- After entering your request, it is automatically sent to AI
+- If AI's reply includes a Linux command, user confirmation is required with `[Y/n]` (pressing enter will also execute)
+
+> [!TIP]
+>
+> Try typing **`help me install Chrome`**, `create a folder on the desktop`
+
+- Enter text starting with **'/'** to execute program instructions:
+  - Print help text:  
+    `/` or `/help` or `/帮助` 
+  - Exit the program:  
+    `/exit` or `/退出`
+  - Print content to be sent to AI (history since last sent):  
+    `/history` or `/历史`
+  - Clear content to be sent to AI:  
+    `/clear` or `/清空`
+  - Manually execute a specific command, e.g. **"example"**:  
+    `/cmd example`
+
+## Known Issues
+
+- None
+
+---
+
+## Links
+
+- [Github Repository](https://github.com/LaphaeL12304/LaphaeLaicmd-linux)
+- [Bilibili](https://space.bilibili.com/454973135?spm_id_from=333.337.0.0)
+- [qq discussion group](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=hE0n_WloYeCndEoIMKjXK5V13yFhswDC&authKey=escV%2FqTpM7dCaNduH1ibLzhp1rIxMCE%2FiMH07XES9Z3yXC9iWbgWkW4h7nPZ7hHJ&noverify=0&group_code=893275911)
