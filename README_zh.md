@@ -47,6 +47,8 @@
    `nano ~/.bashrc`
 2. 在文件末尾添加自定义命令：  
    `alias aicmd="cd ~ && python3 程序在你计算机上的路径/src/main.py"`
+3. 运行以下命令以应用更改：
+   `source ~/.bashrc`
 
 #### 设置API：
 
