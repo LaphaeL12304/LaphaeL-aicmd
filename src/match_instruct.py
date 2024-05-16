@@ -3,10 +3,10 @@
 import pexpect
 import sys
 
-import globals as gl
-import config as cf
-import utils as ut
-import execute_cmd
+from . import globals as gl
+from . import config as cf
+from . import utils as ut
+from . import execute_cmd
 
 
 def match_instruction(instruction):

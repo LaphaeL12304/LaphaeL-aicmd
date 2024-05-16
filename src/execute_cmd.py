@@ -4,9 +4,9 @@ import pexpect
 import getpass
 import time
 
-import globals as gl
-import config as cf
-import utils as ut
+from . import globals as gl
+from . import config as cf
+from . import utils as ut
 
 
 password_prompt = 'password:'

@@ -5,8 +5,8 @@ import sys
 import re
 import os
 
-import config as cf
-import globals as gl
+from . import config as cf
+from . import globals as gl
 
 
 

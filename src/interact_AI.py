@@ -3,9 +3,9 @@
 import getpass
 import google.generativeai as genai
 
-import config as cf
-import utils as ut
-import globals as gl
+from . import config as cf
+from . import utils as ut
+from . import globals as gl
 
 
 
