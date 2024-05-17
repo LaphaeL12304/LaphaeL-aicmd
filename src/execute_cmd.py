@@ -4,9 +4,9 @@ import pexpect
 import getpass
 import time
 
-import globals as gl
-import config as cf
-import utils as ut
+from . import globals as gl
+from . import config as cf
+from . import utils as ut
 
 
 password_prompt = 'password:'
@@ -93,7 +93,7 @@ def execute_command(raw_command, need_confirm = True, print_result = True):
     if print_result:
         ut.print_spoker(ut.set_color(cf.system_name, cf.system_name_color), cf.system_name)
 
-    child = pexpect.spawn(f'/bin/bash -c "{command}"', encoding='utf-8', maxread=8192)
+    child = pexpect.spawn(f'/usr/bin/env bash -c "{command}"', encoding='utf-8', maxread=8192)
 
     try:
         pass_retry = False # 重置重试次数

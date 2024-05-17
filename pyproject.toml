@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "laphaelaicmd_linux"
+version = "1.2.0"
+description = "Python program enable chat AI to execute commands on linux"
+authors = [
+  "LaphaeL12304 <169073130+LaphaeL12304@users.noreply.github.com>",
+  "DataEraserC <102341238+DataEraserC@users.noreply.github.com>",
+]
+license = "AGPL-3.0"
+readme = "README.md"
+homepage = "https://github.com/LaphaeL12304/LaphaeLaicmd-linux"
+repository = "https://github.com/LaphaeL12304/LaphaeLaicmd-linux"
+keywords = ["aicmd", "ai"]
+packages = [{ include = "*.py", from = "src", to = "laphaelaicmd_linux" }]
+include = [{ path = "data", format = ["sdist", "wheel"] }]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pexpect = "^4.9.0"
+google-generativeai = "^0.5.3"
+
+[tool.poetry.scripts]
+aicmd = 'laphaelaicmd_linux:cli'
+laphaelaicmd_linux = 'laphaelaicmd_linux:cli'
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

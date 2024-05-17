@@ -52,7 +52,11 @@ system_version = "System version unkown"
 
 # 设置AI信息
 ai_model = "gemini-pro"
-ai_API_key = "Your-API-Key"
+# 如果读取到环境变量gemini_api_key则赋值
+if "gemini_api_key" in os.environ:
+    ai_API_key = os.environ["gemini_api_key"]
+else:
+    ai_API_key = "Your-API-Key"
 
 
 # 定义路径

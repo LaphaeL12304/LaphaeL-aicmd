@@ -14,12 +14,12 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-import globals as gl
-import config as cf
-import utils as ut
-import interact_AI as ai
-import match_instruct
-import execute_cmd
+from . import globals as gl
+from . import config as cf
+from . import utils as ut
+from . import interact_AI as ai
+from . import match_instruct
+from . import execute_cmd
 
 
 
