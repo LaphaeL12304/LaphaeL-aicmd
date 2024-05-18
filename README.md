@@ -57,8 +57,8 @@
 #### Set up the API:
 
 1. Open the `src/config.py` file
-2. Find **line 63** in `src/config.py` and change `api_key` to your API key (Gemini's API can be obtained for free from Google AI Studio)  
-   `api_key = "Your-API-Key"`
+2. Find **line 63** in `src/config.py` and change `My_key` to your API key (Gemini's API can be obtained for free from Google AI Studio)  
+   `My_key = "Your-API-Key"`
 
 #### Start the program:
 
