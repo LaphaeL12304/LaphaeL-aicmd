@@ -57,8 +57,8 @@
   #### 设置API：
   
   1. 打开`src/config.py`文件
-  2. 找到`src/config.py`中的**第63行**，将`api_key`更改为你的API (Gemini的API可以从 google aistudio 免费获取)  
-     `api_key = "Your-API-Key"`
+  2. 找到`src/config.py`中的**第63行**，将`My_key`更改为你的API (Gemini的API可以从 google aistudio 免费获取)  
+     `My_key = "Your-API-Key"`
   
   #### 启动：
   
