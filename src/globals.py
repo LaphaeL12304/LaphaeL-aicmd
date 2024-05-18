@@ -1,7 +1,5 @@
 """全局变量"""
 
-history = "" # 发送给AI的历史记录
+send_buffer = "" # 即将发送给AI的内容
 
 pwd_path = ""
-ls_home = ""
-system_version = ""

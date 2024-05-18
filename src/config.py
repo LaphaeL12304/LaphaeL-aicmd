@@ -45,18 +45,25 @@ ai_print_color = "37;1"
 program_name = "AIcmd"
 user_name = "User"
 system_name = "System"
-ai_name = "Gemini"
+
+
+
+
+
+
+# 选择AI
+ai_class = "Chat_AI_GPT"
+ai_name = "ChatGPT"
+ai_model = "gpt-4o"
+#ai_class = "Chat_AI_gemini"
+#ai_name = "Gemini"
+#ai_model = "gemini-pro"
+
+# 设置AI的API
+My_key = None # 将此更改为你的key，(My_key = "your_api_key")，记得加引号
+
 
 system_version = "System version unkown"
-
-
-# 设置AI信息
-ai_model = "gemini-pro"
-# 如果读取到环境变量gemini_api_key则赋值
-if "gemini_api_key" in os.environ:
-    ai_API_key = os.environ["gemini_api_key"]
-else:
-    ai_API_key = "Your-API-Key"
 
 
 # 定义路径

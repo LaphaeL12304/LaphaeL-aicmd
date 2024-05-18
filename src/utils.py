@@ -28,25 +28,30 @@ def print_and_record(text, end='\n'):
     """打印文本并记录到历史"""
     print(text, end=end)
     
-    gl.history += text + end
+    gl.send_buffer += text + end
 
 
 
 def slow_print(text, print_time=0.10, max_delay=0.01, end='\n', record=True):
-    """逐字打印文本"""
+    """逐字打印文本
+    对于流式传输时会'少次多量'地输出文本的AI(例如Gemini)，这个函数可以流畅的逐字打印输出
+    但对于每次只输出没几个字符的AI(例如ChatGPT)，这个函数会降低打印速度，因此不推荐此情况下使用
+    """
 
-    delay = print_time / len(text)
+    delay = (print_time / len(text)) if len(text) > 5 else 0
     if delay > max_delay:
         delay = max_delay
 
     for char in text:
         print(char, end='', flush=True)
-        time.sleep(delay)
+        
+        if delay:
+            time.sleep(delay)
 
     print("", end=end)
 
     if record:
-        gl.history += text + end
+        gl.send_buffer += text + end
 
 
 
@@ -65,9 +70,9 @@ def print_spoker(spoker=None, raw_name=None, end='', record=True):
 
     if record:
         if raw_name is not None:
-            gl.history += raw_name + ": " + end
+            gl.send_buffer += raw_name + ": " + end
         else:
-            gl.history += spoker + ": " + end
+            gl.send_buffer += spoker + ": " + end
 
 
 def confirm(printstr = "是否同意?", program_name = ""):
@@ -77,7 +82,7 @@ def confirm(printstr = "是否同意?", program_name = ""):
     print_and_record(printstr + "[Y/n]", end="")
 
     result = input()
-    gl.history += result + "\n"
+    gl.send_buffer += result + "\n"
 
     return True if result.lower() == 'y' or (not result) else False # 如果输入y或无输入，则返回True
 
