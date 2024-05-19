@@ -3,7 +3,7 @@ import os
 import configparser
 
 # 定义配置文件路径
-config_dir = os.path.join(os.path.expanduser('~'), '.config', 'aicmd')
+config_dir = os.path.join(os.path.expanduser('~'), '.config', 'LaphaeLaicmd')
 config_file = os.path.join(config_dir, 'config.ini')
 
 # 检查配置文件目录是否存在，如果不存在则创建
