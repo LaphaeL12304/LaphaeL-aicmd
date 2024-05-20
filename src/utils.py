@@ -9,7 +9,6 @@ from . import config as cf
 from . import globals as gl
 
 
-
 def extract_command(text):
     """匹配被"///"包裹的文本"""
     pattern = r'///(.*?)///'

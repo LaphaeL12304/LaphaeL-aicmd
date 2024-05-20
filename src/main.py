@@ -98,7 +98,7 @@ def main():
 
     gl.send_buffer = ""
 
-    print('_' * 80, end="\n\n")
+    print('_' * os.get_terminal_size().columns, end="\n\n")
 
     
 
