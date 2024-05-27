@@ -3,10 +3,10 @@
 import pexpect
 import sys
 
-import globals as gl
-import config as cf
-import utils as ut
-import execute_cmd
+from . import globals as gl
+from . import config as cf
+from . import utils as ut
+from . import execute_cmd
 
 
 def match_instruction(instruction):
@@ -14,10 +14,8 @@ def match_instruction(instruction):
 
     if instruction.startswith('/cmd '):
         try:
-            system_output = execute_cmd.execute_command(instruction[5:]) # 执行此命令命令
-            if not system_output.replace(" ",""):
-                system_output = "执行成功\n"
-            gl.history += system_output # 将执行结果添加到历史记录中
+            system_output = execute_cmd.execute_command(instruction[5:], False) # 执行此命令命令
+            gl.send_buffer += system_output # 将执行结果添加到历史记录中
         except Exception as e:
             ut.print_spoker()
             ut.print_and_record(str(e)) # 打印异常信息
@@ -33,14 +31,14 @@ def match_instruction(instruction):
 
             case "/help" | "/帮助" | "/": # 打印帮助文本
                 ut.slow_print("这是帮助文本，暂时没写", record=False)
-                gl.history += "#省略帮助文本\n"
+                gl.send_buffer += "#省略帮助文本\n"
 
-            case "/history" | "/历史": # 打印历史记录
-                ut.slow_print("以下是历史记录：\n" + gl.history, record=False)
-                gl.history += "#省略打印历史记录\n"
+            case "/content" | "/内容": # 打印即将发送的内容
+                ut.slow_print("以下是历史记录：\n" + gl.send_buffer, record=False)
+                gl.send_buffer += "#省略打印历史记录\n"
 
-            case "/clear" | "/清空": # 清空历史记录
-                gl.history = ""
+            case "/clear" | "/清空": # 清空即将发送的内容
+                gl.send_buffer = ""
                 print("历史记录已清空")
 
             case _: # 其他情况

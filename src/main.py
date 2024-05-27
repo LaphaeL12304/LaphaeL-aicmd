@@ -13,18 +13,20 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+import sys
+import os
 
-import globals as gl
-import config as cf
-import utils as ut
-import interact_AI as ai
-import match_instruct
-import execute_cmd
+
+from . import globals as gl
+from . import config as cf
+from . import utils as ut
+from . import interact_AI as ai
+from . import match_instruct
+from . import execute_cmd
 
 
 
 def main():
-
 
     # 打印初始化信息
     ut.print_spoker(record=False)
@@ -36,7 +38,6 @@ def main():
 
     try:
         gl.pwd_path = execute_cmd.execute_command("pwd", False, False)
-        gl.ls_home = execute_cmd.execute_command("ls", False, False)
         result = execute_cmd.execute_command("whoami", False, False)
         cf.user_name = result.replace('\n', '')
         result = execute_cmd.execute_command("lsb_release -a", False, False)
@@ -70,13 +71,21 @@ def main():
     # 配置AI
     print("正在尝试连接到\"" + cf.ai_name + "\"...")
 
-    prompt = "Here is how you should response:{\n" + \
-        instruction_prompt + \
-        "\n}\nHere is the custom instruction you should follow:{\n" + \
-        custom_instruct + \
-        "如果你明白以上要求，请回复\"准备就绪\""
+    init_prompt = cf.program_name + \
+        ": Here is the custom instruction you should follow in the subsequent conversation:{\n" + \
+        custom_instruct + "}\n" + \
+        "Here is some basic imformations about the user's system:{\n" + \
+        "System version: " + cf.system_version + "\n" + \
+        "Operating path: " + gl.pwd_path + "\n" + \
+        "User name: " + cf.user_name + "\n}" + \
+        "If you understand the instructions above, please reply '准备就绪'"
 
-    chat_ai = ai.Chat_AI_gemini(api_key = cf.ai_API_key, instruction_prompt=prompt)
+    # 获取AI类
+    try:
+        chat_ai_class = ai.get_ai_class()
+        chat_ai = chat_ai_class(api_key = cf.My_key, instruction_prompt=instruction_prompt, init_prompt=init_prompt)
+    except Exception as e:
+        sys.exit("获取AI类失败："+ str(e))
 
     if not chat_ai.ready:
         sys.exit("连接到\"" + cf.ai_name + "\"失败")
@@ -87,7 +96,7 @@ def main():
     print("连接成功! \"" + cf.ai_name + "\"已经理解程序要求")
     print("\"" + cf.program_name + "\"已准备就绪!")
 
-    gl.history = ""
+    gl.send_buffer = ""
 
     print('_' * 80, end="\n\n")
 
@@ -103,7 +112,7 @@ def main():
             user_input = input()
 
             if user_input.startswith('/'):
-                gl.history += user_input + '\n'
+                gl.send_buffer += user_input + '\n'
                 match_instruct.match_instruction(user_input)
 
             elif user_input:
@@ -114,17 +123,21 @@ def main():
             if user_input_sent:
                 user_input = ""
 
-            ai_output = chat_ai.interact(user_input, gl.history)
+            ai_output = chat_ai.interact(user_input, gl.send_buffer)
             user_input_sent = True
-            gl.history = ""
+            gl.send_buffer = ""
             ai_output_command = ut.extract_command(ai_output)
 
             if ai_output_command:
                 try:
                     system_output = execute_cmd.execute_command(ai_output_command) # 执行此命令命令
-                    if not system_output.replace(" ",""):
-                        system_output = "执行成功\n"
-                    gl.history += system_output # 将执行结果添加到历史记录中
+                    gl.send_buffer += system_output
+
+                except ValueError as e:
+                    ut.print_spoker()
+                    ut.print_and_record(str(e)) # 打印异常信息
+                    control_on_user = True
+
                 except Exception as e:
                     ut.print_spoker()
                     ut.print_and_record(str(e)) # 打印异常信息
@@ -136,4 +149,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-    
