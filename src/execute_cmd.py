@@ -43,7 +43,7 @@ def execute_command(command, need_confirm = True, print_result = True):
     if print_result:
         ut.print_spoker(ut.set_color(cf.system_name, cf.system_name_color), cf.system_name)
 
-    child = pexpect.spawn(rf'/bin/bash -c "{command}"', encoding='utf-8', maxread=8192)
+    child = pexpect.spawn(rf'/usr/bin/env bash -c "{command}"', encoding='utf-8', maxread=8192)
 
     try:
         pass_retry = False # 重置重试次数
