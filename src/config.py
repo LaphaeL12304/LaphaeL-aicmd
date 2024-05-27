@@ -3,7 +3,9 @@ import os
 import configparser
 
 # 定义配置文件路径
-config_dir = os.path.join(os.path.expanduser('~'), '.config', 'LaphaeLaicmd')
+# 尝试从环境变量laphaelaicmd_linux_config_dir读取config_dir
+# 读取不到则回退到写死的位置
+config_dir = os.getenv('laphaelaicmd_linux_config_dir', os.path.join(os.path.expanduser('~'), '.config', 'LaphaeLaicmd'))
 config_file = os.path.join(config_dir, 'config.ini')
 
 # 检查配置文件目录是否存在，如果不存在则创建
@@ -83,18 +85,58 @@ config.read(config_file)
 # 8：隐藏
 
 # 打印的发言人名称颜色
-program_name_color = config['COLORS']['program_name_color']
-user_name_color = config['COLORS']['user_name_color']
-system_name_color = config['COLORS']['system_name_color']
-ai_name_color = config['COLORS']['ai_name_color']
+try:
+    program_name_color = config['COLORS']['program_name_color']
+except configparser.NoSectionError:
+    print("program_name_color not found, fallback to default")
+    program_name_color = "35;1"
+
+try:
+    user_name_color = config['COLORS']['user_name_color']
+except configparser.NoSectionError:
+    print("user_name_color not found, fallback to default")
+    user_name_color = "32;1"
+
+try:
+    system_name_color = config['COLORS']['system_name_color']
+except configparser.NoSectionError:
+    print("system_name_color not found, fallback to default")
+    system_name_color = "33;1"
+
+try:
+    ai_name_color = config['COLORS']['ai_name_color']
+except configparser.NoSectionError:
+    print("ai_name_color not found, fallback to default")
+    ai_name_color = "34;1"
+
 
 # AI输出文本打印的颜色
-ai_print_color = config['COLORS']['ai_print_color']
+try:
+    ai_print_color = config['COLORS']['ai_print_color']
+except configparser.NoSectionError:
+    print("ai_print_color not found, fallback to default")
+    ai_print_color = "37;1"
+
 
 # 定义初始名称
-program_name = config['NAMES']['program_name']
-user_name = config['NAMES']['user_name']
-system_name = config['NAMES']['system_name']
+try:
+    program_name = config['NAMES']['program_name']
+except configparser.NoSectionError:
+    print("program_name not found, fallback to default")
+    program_name = "37;1"
+
+try:
+    user_name = config['NAMES']['user_name']
+except configparser.NoSectionError:
+    print("user_name not found, fallback to default")
+    user_name = "37;1"
+
+try:
+    system_name = config['NAMES']['system_name']
+except configparser.NoSectionError:
+    print("system_name not found, fallback to default")
+    system_name = "37;1"
+
 
 # 选择AI
 ai_class = config['AI']['ai_class']
@@ -105,6 +147,41 @@ My_key = config['AI']['My_key']
 system_version = config['other']['system_version']
 
 # 定义路径
-project_root = config['path']['project_root']
-instruction_prompt_path = config['path']['instruction_prompt_path']
-custom_instruct_path = config['path']['custom_instruct_path']
+try:
+    project_root = config['path']['project_root']
+    if os.path.exists(project_root):
+        pass
+    else:
+        print("project_root not valid, fallback to default:",end="")
+        project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        print(project_root)
+except:
+    print("project_root not valid, fallback to default:",end="")
+    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    print(project_root)
+
+try:
+    instruction_prompt_path = config['path']['instruction_prompt_path']
+    if os.path.exists(instruction_prompt_path):
+        pass
+    else:
+        print("instruction_prompt_path not valid, fallback to default:",end="")
+        instruction_prompt_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        print(instruction_prompt_path)
+except:
+    print("instruction_prompt_path not valid, fallback to default:",end="")
+    instruction_prompt_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "instruction_prompt.txt")
+    print(instruction_prompt_path)
+
+try:
+    custom_instruct_path = config['path']['custom_instruct_path']
+    if os.path.exists(custom_instruct_path):
+        pass
+    else:
+        print("custom_instruct_path not valid, fallback to default:",end="")
+        custom_instruct_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        print(custom_instruct_path)
+except:
+    print("custom_instruct_path not valid, fallback to default:",end="")
+    custom_instruct_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "custom_instruct.txt")
+    print(custom_instruct_path)
