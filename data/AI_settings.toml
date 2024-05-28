@@ -15,10 +15,17 @@ Please answer in this language: 简体中文. Other customize instructions: 我�
 select_ai = "ChatGPT" # 目前支持'ChatGPT'和'Gemini' - Currently support 'ChatGPT' and 'Gemini'
 
 [info.ChatGPT]
-api_key = ""
-model = "gpt-4o"
+api_key = "" # 更改成你的API - Change to your API key
+model = "gpt-4o" 
+
+# 其他支持的模型 - Other supported models:
+# gpt-4-turbo
+# gpt-4
+# gpt-4-32k
+# gpt-3.5-turbo-0125
+# gpt-3.5-turbo-instruct
 
 [info.Gemini]
-api_key = ""
+api_key = "" # 更改成你的API - Change to your API key
 model = "gemini-pro"
 
