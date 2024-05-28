@@ -1,6 +1,7 @@
 """配置文件 - Configurations"""
 
 import os
+import shutil
 import toml
 
 def load_toml_config(file_path):
@@ -23,10 +24,31 @@ def get_config_value(config, section, key):
     except KeyError:
         return None
 
+# TODO: 将默认配置文件打包到site-packages/LaphaeLaicmd/data/
+# origin_resource_dir = os.path.dirname(__file__)
 
-project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-ai_settings_path = os.path.join(project_root, "data", "AI_settings.toml")
-config_path = os.path.join(project_root, "data", "config.toml")
+# 默认从环境变量读取数据文件夹的位置 不存在则回退到默认的位置~/.config/LaphaeLaicmd
+resource_dir = os.getenv('laphaelaicmd_linux_config_dir', os.path.join('~', '.config', 'LaphaeLaicmd'))
+resource_dir = os.path.expanduser(resource_dir)
+
+if os.path.exists(os.path.join(resource_dir,"data")):
+    pass
+else:
+    os.makedirs(os.path.join(resource_dir,"data"))
+
+# 获取AI设置 若不存在则创建
+ai_settings_path = os.path.join(resource_dir, "data", "AI_settings.toml")
+if os.path.exists(ai_settings_path):
+    pass
+else:
+    shutil.copy(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),"data","AI_settings.toml"), os.path.join(resource_dir,"data"))
+
+# 获取其他设置 若不存在则创建
+config_path = os.path.join(resource_dir, "data", "config.toml")
+if os.path.exists(config_path):
+    pass
+else:
+    shutil.copy(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),"data","config.toml"), os.path.join(resource_dir,"data"))
 
 ai_settings = load_toml_config(ai_settings_path)
 config = load_toml_config(config_path)
@@ -36,6 +58,7 @@ if ai_name is not None:
     ai_model = get_config_value(ai_settings, f"info.{ai_name}", "model")
     My_key = get_config_value(ai_settings, f"info.{ai_name}", "api_key")
 else:
+    ai_model = None
     My_key = None
 
 instruction_prompt = get_config_value(ai_settings, "prompt", "text")
@@ -60,6 +83,6 @@ system_version = "System version unkown"
 
 if __name__ == "__main__":
     print("AI Name:", ai_name)
-    print("API Key:", my_key)
+    print("API Key:", My_key)
     print("Model:", ai_model)
     print("color:", ai_name_color)
