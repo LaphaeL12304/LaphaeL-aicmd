@@ -12,7 +12,7 @@
 - 自动捕获AI响应中的Linux命令
 - 执行命令前向用户确认
 - 支持AI分步执行复杂任务
-- 目已支持Gemini与ChatGPT，未来考虑支持Ollama本地模型
+- 目前已支持Gemini与ChatGPT，未来考虑支持Ollama本地模型
 - 目前只有中文界面，正在考虑加入其他语言
 
 ---
