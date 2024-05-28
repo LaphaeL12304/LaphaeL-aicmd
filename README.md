@@ -28,10 +28,6 @@
 > - **Attention! Although this program requires user confirmation to execute Linux commands, it is difficult to guarantee that there will be no bugs, so please do not run this program on systems with important data**
 > - This program is still in an **early stage**, has many bugs, and has only been tested on the Ubuntu 22.04 LTS distribution
 
-# Table of Contents
-
-[TOC]
-
 ---
 
 ## Installation
