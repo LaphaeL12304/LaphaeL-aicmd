@@ -4,7 +4,7 @@
 
 ---
 
-# Simplified Chinese | [English](README.md)
+# [简体中文](README_zh.md) | English
 
 ## What is it for?
 
