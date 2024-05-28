@@ -24,6 +24,7 @@ toml = "^0.10.2"
 [tool.poetry.scripts]
 aicmd = 'laphaelaicmd_linux:cli'
 laphaelaicmd_linux = 'laphaelaicmd_linux:cli'
+laphaelaicmd-linux = 'laphaelaicmd_linux:cli'
 
 [build-system]
 requires = ["poetry-core"]

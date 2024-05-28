@@ -3,11 +3,13 @@
 import os
 import toml
 
+
 def load_toml_config(file_path):
     with open(file_path, 'r', encoding='utf-8') as file:
         config = toml.load(file)
     return config
 
+  
 def save_toml_config(file_path, config):
     with open(file_path, 'w', encoding='utf-8') as file:
         toml.dump(config, file)
@@ -42,7 +44,6 @@ instruction_prompt = get_config_value(ai_settings, "prompt", "text")
 custom_instruct = get_config_value(ai_settings, "custom_instruct", "text")
 
 
-# 打印的发言人名称颜色
 program_name_color = get_config_value(config, "display", "program_name_color")
 user_name_color = get_config_value(config, "display", "user_name_color")
 system_name_color = get_config_value(config, "display", "system_name_color")
@@ -57,6 +58,7 @@ program_name = "AIcmd"
 user_name = "User"
 system_name = "System"
 system_version = "System version unkown"
+
 
 if __name__ == "__main__":
     print("AI Name:", ai_name)
