@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "laphaelaicmd_linux"
-version = "1.2.1"
+version = "1.2.2"
 description = "Python program enable chat AI to execute commands on linux"
 authors = [
   "LaphaeL12304 <169073130+LaphaeL12304@users.noreply.github.com>",
@@ -16,9 +16,10 @@ include = [{ path = "data", format = ["sdist", "wheel"] }]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-pexpect = "^4.9.0"
 google-generativeai = "^0.5.3"
 openai = "^1.30.1"
+ptyprocess = "^0.7.0"
+toml = "^0.10.2"
 
 [tool.poetry.scripts]
 aicmd = 'laphaelaicmd_linux:cli'
