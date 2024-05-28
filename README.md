@@ -68,7 +68,7 @@
    - If using the ChatGPT model, this module is required and can be installed with the following command:
      `pip install openai`
 
-### Step Three: Add Linux Custm Command
+### Step Three: Add Linux Custom Command
 
 1. Execute the following command in the Linux terminal to open the file:
    `nano ~/.bashrc`
