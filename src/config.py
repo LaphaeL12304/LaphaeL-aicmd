@@ -1,4 +1,4 @@
-"""配置文件"""
+"""配置文件 - Configurations"""
 
 import os
 import toml
