@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "laphaelaicmd_linux"
-version = "1.2.2"
+version = "1.2.3"
 description = "Python program enable chat AI to execute commands on linux"
 authors = [
   "LaphaeL12304 <169073130+LaphaeL12304@users.noreply.github.com>",
