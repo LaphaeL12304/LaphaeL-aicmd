@@ -1,10 +1,10 @@
 # LaphaeLaicmd-linux
 
-- Allows chat AI to execute Linux commands on the user's computer
+- Enable chat AI to execute commands on linux with feedback-loop for multi-step missions
 
 ---
 
-# [简体中文](README_zh.md) | English
+# [点我查看简体中文版](README_zh.md)
 
 ## What is it for?
 
@@ -13,24 +13,25 @@
 - Asks for user confirmation before executing commands
 - Supports AI in step-by-step execution of complex tasks
 - Currently supports Gemini and ChatGPT, with plans to support the Ollama local model in the future
-- Currently only has a Chinese interface, other languages are being considered
+- Currently support English and Simplified Chinese interface, more languages are considering
 
 ---
 
-## V1.2.2 Update
+## V1.2.3 Update
 
-1. Fixed the issue with escaping quotes in commands
-2. Added configuration files `AI_settings.toml`, `config.toml`
-3. Improved usage of poetry and nix (thanks to contributions from [DataEraserC](https://github.com/DataEraserC))
+1. Support multi-languages (currently only English and Simplified Chinese)
+2. Added `locales`file
+3. Improved help text when entering `/help` in the program
+4. Improved usage of poetry and nix (thanks to contributions from [DataEraserC](https://github.com/DataEraserC))
 
 > [!WARNING]
 >
 > - **Attention! Although this program requires user confirmation to execute Linux commands, it is difficult to guarantee that there will be no bugs, so please do not run this program on systems with important data**
-> - This program is still in an **early stage**, has many bugs, and has only been tested on the Ubuntu 22.04 LTS distribution
+> - This program is still in an **early stage**, has only been tested on the Ubuntu 22.04 LTS distribution
 
 ---
 
-## Installation
+## How to setup
 
 ### Step One: Download the Program
 
@@ -68,7 +69,7 @@
    - If using the ChatGPT model, this module is required and can be installed with the following command:
      `pip install openai`
 
-### Step Three: Add Linux Custm Command
+### Step Three: Add Linux Custom Command
 
 1. Execute the following command in the Linux terminal to open the file:
    `nano ~/.bashrc`
