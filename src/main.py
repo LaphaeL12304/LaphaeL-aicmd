@@ -19,8 +19,11 @@ import os
 import getpass
 import platform
 import distro
+import gettext
+import locale
 
 from . import globals as gl
+_ = gl.translate
 from . import config as cf
 from . import utils as ut
 from . import interact_AI as ai
@@ -33,12 +36,19 @@ def main():
     主函数 - Main function
     """
 
+    # 获取系统默认的地区设置，可能需要处理一下格式以适配gettext
+    current_locale, encoding = locale.getdefaultlocale()
+    # 一般来说，locale返回的是类似于'en_US.UTF-8'，需要简化为'en_US'
+    current_locale = current_locale.split('.')[0] if current_locale else 'en_US'
+    gl.setup_i18n(current_locale)  # 设置语言
+
+
     # 打印初始化信息 - Print initialization information
     ut.print_spoker(record=False)
-    print("正在初始化...")
+    print(_("Initializing..."))
 
     # 获取系统信息 - Get system information
-    print("正在获取系统信息...")
+    print(_("Getting system information..."))
 
     gl.pwd_path = os.getcwd()
     result = getpass.getuser()
@@ -47,15 +57,15 @@ def main():
     cf.system_name = distro.name()
 
     # 读取文件 - Read files
-    print("正在获取配置文件...")
+    print(_("Getting configurations..."))
 
     if cf.instruction_prompt == '':
-        sys.exit("'instruct_prompt'为空")
+        sys.exit(_("'instruct_prompt' is empty"))
     elif cf.custom_instruct == '':
         cf.custom_instruct = "None"
 
     # 配置AI - Configure AI
-    print("正在尝试连接到\"" + cf.ai_name + "\"...")
+    print(_("Connecting to") + "\"" + cf.ai_name + "\"...")
 
     init_prompt = cf.program_name + \
         ": Here is the custom instruction you should follow in the subsequent conversation:{\n" + \
@@ -64,22 +74,22 @@ def main():
         "System version: " + cf.system_version + "\n" + \
         "Operating path: " + gl.pwd_path + "\n" + \
         "User name: " + cf.user_name + "\n}" + \
-        "If you understand the instructions above, please reply '准备就绪'"
+        "If you understand the instructions above, please reply " + _("'ready'")
 
     # 获取AI类 - Get AI class
     try:
         chat_ai_class = ai.get_ai_class()
         chat_ai = chat_ai_class(api_key=cf.My_key, instruction_prompt=cf.instruction_prompt, init_prompt=init_prompt)
     except Exception as e:
-        sys.exit("获取AI类失败：" + str(e))
+        sys.exit(_("Failed to obtain AI class: ") + str(e))
 
     if not chat_ai.ready:
-        sys.exit("连接到\"" + cf.ai_name + "\"失败")
+        sys.exit(_("Failed to connect to") + "\"" + cf.ai_name + "\"")
 
     # 初始化完成 - Initialization complete
     ut.print_spoker(record=False)
-    print("连接成功! \"" + cf.ai_name + "\"已经理解程序要求")
-    print("\"" + cf.program_name + "\"已准备就绪!")
+    print(_("Connection successed!") + "\"" + cf.ai_name + "\"" + _("have understood the instructions!"))
+    print("\"" + cf.program_name + "\"" + _("is now ready!"))
 
     gl.send_buffer = ""
 

@@ -1,3 +1,5 @@
+"""执行命令 - Execute the command"""
+
 from ptyprocess import PtyProcessUnicode
 import shlex
 import getpass

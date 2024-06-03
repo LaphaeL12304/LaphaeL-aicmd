@@ -100,7 +100,7 @@ def print_spoker(spoker=None, raw_name=None, end='', record=True):
             gl.send_buffer += spoker + ": " + end
 
 
-def confirm(printstr="是否同意?", program_name=""):
+def confirm(printstr="Do you agree?", program_name=""):
     """
     打印[Y/n]确认界面 - Print [Y/n] confirmation interface
     
@@ -126,7 +126,7 @@ def read_file(file_path):
     :raises Exception: 如果文件不存在或读取失败 - If file does not exist or reading fails
     """
     if not os.path.exists(file_path):
-        raise Exception("文件不存在") from None
+        raise Exception("File do not exist") from None
     else:
         try:
             # 打开文件，指定相对路径 - Open file with specified relative path

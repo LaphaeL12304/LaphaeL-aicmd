@@ -1,8 +1,10 @@
 """匹配指令 - Match Instructions"""
 
 import sys
+import os
 
 from . import globals as gl
+_ = gl.translate
 from . import config as cf
 from . import utils as ut
 from . import execute_cmd
@@ -27,20 +29,23 @@ def match_instruction(instruction):
         match instruction:  # 如果用户输入以'/'开头，则匹配用户输入 - Match user input if it starts with '/'
 
             case "/exit" | "/退出":  # 退出程序 - Exit program
-                print("正在退出程序...")
+                print(_("Exitting program..."))
                 sys.exit(0)
 
             case "/help" | "/帮助" | "/":  # 打印帮助文本 - Print help text
-                ut.slow_print("这是帮助文本，暂时没写", record=False)
-                gl.send_buffer += "#省略帮助文本\n"
+                cli_outputs_path = os.path.join(cf.project_root, "data", "_cli_outputs.toml")
+                cli_outputs = cf.load_toml_config(cli_outputs_path)
+                help_text = cf.get_config_value(cli_outputs, "help_text", "text")
+                ut.slow_print(help_text, record=False)
+                gl.send_buffer += _("# Omit help text\n")
 
             case "/content" | "/内容":  # 打印即将发送的内容 - Print content to be sent
-                ut.slow_print("以下是历史记录：\n" + gl.send_buffer, record=False)
-                gl.send_buffer += "#省略打印历史记录\n"
+                ut.slow_print(_("Here is the content to be sent to AI: \n") + gl.send_buffer, record=False)
+                gl.send_buffer += _("# Omit printed content\n")
 
             case "/clear" | "/清空":  # 清空即将发送的内容 - Clear content to be sent
                 gl.send_buffer = ""
-                print("历史记录已清空")
+                print(_("Content is cleared"))
 
             case _:  # 其他情况 - Other cases
-                ut.print_and_record("无效指令")
+                ut.print_and_record(_("No such command, you may enter '/help' for more information"))
