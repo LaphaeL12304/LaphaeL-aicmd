@@ -35,7 +35,7 @@
 
 ### Step One: Download the Program
 
-- [Github download link](https://github.com/LaphaeL12304/LaphaeLaicmd-linux/archive/refs/heads/main.zip)
+- [Click me to download from Github](https://github.com/LaphaeL12304/LaphaeLaicmd-linux/archive/refs/heads/main.zip)
 
 ### Step Two: Install Python Dependencies
 
