@@ -4,7 +4,7 @@
 
 ---
 
-# 简体中文 | [English](README.md)
+# [Click me to see English version](README.md)
 
 ## 它有什么用？
 
@@ -13,28 +13,29 @@
 - 执行命令前向用户确认
 - 支持AI分步执行复杂任务
 - 目已支持Gemini与ChatGPT，未来考虑支持Ollama本地模型
-- 目前只有中文界面，正在考虑加入其他语言
+- 目前支持简中和英文界面，正在考虑添加更多语言
 
 ---
 
-## V1.2.2更新内容
+## V1.2.3更新内容
 
-1. 解决无法转义命令中的引号
-2. 添加配置文件`AI_settings.toml`，`config.toml`
-3. 优化通过poetry与nix的使用 (感谢来自[DataEraserC](https://github.com/DataEraserC)贡献的代码)
+1. 支持多语言 (目前仅简中和英文)
+2. 增加`locales`文件
+3. 优化当输入`/help`时打印的帮助文档
+4. 优化通过poetry与nix的使用 (感谢来自[DataEraserC](https://github.com/DataEraserC)贡献的代码)
 
 > [!WARNING]
 >
 > - **注意！尽管此程序要求用户确认才能执行Linux命令，但很难保证不会出什么bug，因此请勿在有重要资料的系统上运行此程序**
-> - 此程序目前仍处于**早期阶段**，bug还很多，并且只测试了Ubuntu 22.04 LTS发行版上的运行
+> - 此程序目前仍处于**早期阶段**，并且只测试了Ubuntu 22.04 LTS发行版上的运行
 
 ---
 
-## 安装
+## 如何开始
 
 ### 第一步：下载程序
 
-- [Github下载链接](https://github.com/LaphaeL12304/LaphaeLaicmd-linux/archive/refs/heads/main.zip)
+- [点我从Github下载](https://github.com/LaphaeL12304/LaphaeLaicmd-linux/archive/refs/heads/main.zip)
 
 ### 第二步：安装Python依赖
 
