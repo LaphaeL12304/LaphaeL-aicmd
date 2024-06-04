@@ -1,4 +1,4 @@
-# LaphaeLaicmd-linux
+# LaphaeL-aicmd
 
 - 让聊天AI可以在用户的计算机执行Linux命令
 
@@ -21,8 +21,10 @@
 
 1. 支持多语言 (目前仅简中和英文)
 2. 增加`locales`文件
-3. 优化当输入`/help`时打印的帮助文档
-4. 优化通过poetry与nix的使用 (感谢来自[DataEraserC](https://github.com/DataEraserC)贡献的代码)
+3. 将配置信息移动到`~/.resources`文件夹
+4. 项目更名为`LaphaeL-aicmd`
+5. 优化当输入`/help`时打印的帮助文档
+6. 优化通过poetry与nix的使用 (感谢来自[DataEraserC](https://github.com/DataEraserC)贡献的代码)
 
 > [!WARNING]
 >
@@ -35,7 +37,7 @@
 
 ### 第一步：下载程序
 
-- [点我从Github下载](https://github.com/LaphaeL12304/LaphaeLaicmd-linux/archive/refs/heads/main.zip)
+- [点我从Github下载](https://github.com/LaphaeL12304/LaphaeL-aicmd/archive/refs/heads/main.zip)
 
 ### 第二步：安装Python依赖
 
@@ -123,6 +125,6 @@
 
 ## 链接
 
-- [Github仓库](https://github.com/LaphaeL12304/LaphaeLaicmd-linux)
+- [Github仓库](https://github.com/LaphaeL12304/LaphaeL-aicmd)
 - [Bilibili](https://space.bilibili.com/454973135?spm_id_from=333.337.0.0)
 - [qq讨论群](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=hE0n_WloYeCndEoIMKjXK5V13yFhswDC&authKey=escV%2FqTpM7dCaNduH1ibLzhp1rIxMCE%2FiMH07XES9Z3yXC9iWbgWkW4h7nPZ7hHJ&noverify=0&group_code=893275911)
