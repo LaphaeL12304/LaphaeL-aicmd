@@ -1,6 +1,4 @@
 """全局变量 - Global variables"""
-import gettext
-import locale
 import os
 
 

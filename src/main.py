@@ -38,9 +38,7 @@ def main():
 
     # 获取系统默认的地区设置，可能需要处理一下格式以适配gettext
     current_locale, encoding = locale.getdefaultlocale()
-    # 一般来说，locale返回的是类似于'en_US.UTF-8'，需要简化为'en_US'
-    current_locale = current_locale.split('.')[0] if current_locale else 'en_US'
-    gl.setup_i18n(current_locale)  # 设置语言
+    cf.setup_i18n(current_locale)  # 设置语言
 
 
     # 打印初始化信息 - Print initialization information

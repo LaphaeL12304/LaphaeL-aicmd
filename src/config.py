@@ -3,6 +3,9 @@
 import os
 import shutil
 import toml
+import subprocess
+import gettext
+import locale
 
 def load_toml_config(file_path):
     with open(file_path, 'r', encoding='utf-8') as file:
@@ -67,39 +70,6 @@ def overwrite_resource(resource_directory, target_relative_path, source_packaged
     else:  
         # 原始路径既不是文件也不是文件夹，抛出异常或处理错误  
         raise FileNotFoundError(f"The source packaged resource '{source_packaged_path}' does not exist.")  
-  
-
-def setup_i18n(current_locale="en_US"):
-    """
-    设置语言 - Set language
-
-    :param current_locale: 系统默认的地区设置，可能需要处理一下格式以适配gettext
-     - System's default language, may require normalization for gettext
-    """
-    
-    current_dir = os.path.dirname(__file__)
-    locale_path = os.path.join(current_dir, "../locales")
-    locale_path = os.path.normpath(locale_path)
-
-    mo_path = os.path.join(locale_path, current_locale, 'LC_MESSAGES', 'messages.mo')
-
-    try:
-        language = gettext.translation('messages', localedir=locale_path, languages=[current_locale], fallback=True)
-        language.install()
-
-    except FileNotFoundError:
-        # 找不到指定的语言文件，加载默认语言(en_US) - Language not found, fallback to English
-        logging.warning(f"Language file for {current_locale} not found. Falling back to English (US).")
-        language = gettext.translation('messages', localedir=locale_path, languages=['en_US'], fallback=True)
-        language.install()
-
-    except Exception as e:
-        print("Error loading the .mo file:", e)
-        _ = lambda x: x
-
-
-def translate(text):
-    return _(text)
 
 
 # 默认从环境变量读取数据文件夹的位置 不存在则回退到默认的位置~/.config/LaphaeLaicmd
@@ -109,7 +79,51 @@ resource_dir = os.path.expanduser(resource_dir)
 # path to ensure in resource_dir
 resource_required_ensure = ["data/","locales"]
 for resource_required_ensure_dir in resource_required_ensure:  
-    ensure_resource_existence(resource_dir,resource_required_ensure_dir, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), resource_dir))
+    ensure_resource_existence(resource_dir,resource_required_ensure_dir, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), resource_required_ensure_dir))
+
+
+def setup_i18n(locale="en_US"):
+    """
+    设置语言 - Set language
+
+    :param current_locale: 系统默认的地区设置，可能需要处理一下格式以适配gettext
+     - System's default language, may require normalization for gettext
+    """
+    # 一般来说，locale返回的是类似于'en_US.UTF-8'，需要简化为'en_US'
+    current_locale = locale.split('.')[0] if locale else 'en_US'
+
+    locale_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "locales")
+    resource_locale_path = os.path.join(resource_dir, "locales")
+
+    mo_dir = os.path.join(resource_locale_path, current_locale, 'LC_MESSAGES')
+    mo_path = os.path.join(mo_dir, 'messages.mo')
+
+    if not os.path.exists(mo_dir):
+        os.makedirs(mo_dir)
+
+    if not os.path.exists(mo_path):
+        po_path = os.path.join(locale_path, 'po_files', f'{current_locale}.po')
+        print(f"Compiling {po_path} to {mo_path}...")
+        subprocess.run(['msgfmt', po_path, '-o', mo_path], check=True)
+        print(f"Compiled {mo_path} successfully.")
+
+    try:
+        language = gettext.translation('messages', localedir=resource_locale_path, languages=[current_locale], fallback=True)
+        language.install()
+
+    except FileNotFoundError:
+        # 找不到指定的语言文件，加载默认语言(en_US) - Language not found, fallback to English
+        logging.warning(f"Language file for {current_locale} not found. Falling back to English (US).")
+        if current_locale != 'en_US':
+            setup_i18n('en_US')  # 设置为默认语言
+
+    except Exception as e:
+        print("Error loading the .mo file:", e)
+        _ = lambda x: x
+
+def translate(text):
+    return _(text)
+
 
 ai_settings_path = os.path.join(resource_dir, "data", "AI_settings.toml")
 config_path = os.path.join(resource_dir, "data", "config.toml")
