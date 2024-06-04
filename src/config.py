@@ -153,6 +153,9 @@ user_name_color = get_config_value(config, "display", "user_name_color")
 system_name_color = get_config_value(config, "display", "system_name_color")
 ai_name_color = get_config_value(config, "display", "ai_name_color")
 
+# 语言选择
+language_select = get_config_value(config, "display", "language")
+
 # AI输出文本打印的颜色
 ai_print_color = get_config_value(config, "display", "ai_print_color")
 

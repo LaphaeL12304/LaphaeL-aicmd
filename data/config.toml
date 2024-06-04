@@ -1,37 +1,37 @@
 [display]
 
-# 文本颜色
-# 30：黑色
-# 31：红色
-# 32：绿色
-# 33：黄色
-# 34：蓝色
-# 35：洋红色
-# 36：青色
-# 37：白色
-# 背景颜色
-# 40：黑色背景
-# 41：红色背景
-# 42：绿色背景
-# 43：黄色背景
-# 44：蓝色背景
-# 45：洋红色背景
-# 46：青色背景
-# 47：白色背景
-# 格式
-# 0：重置所有属性
-# 1：加粗
-# 4：下划线
-# 5：闪烁
-# 7：反显
-# 8：隐藏
+# 文本颜色 Text color
+# 30：黑色 black
+# 31：红色 red
+# 32：绿色 green
+# 33：黄色 yellow
+# 34：蓝色 blue
+# 35：洋红色 pink
+# 36：青色 cyan
+# 37：白色 white
+# 背景颜色 background color
+# 40：黑色背景 black background
+# 41：红色背景 red background
+# 42：绿色背景 green background
+# 43：黄色背景 yellow background
+# 44：蓝色背景 blue background
+# 45：洋红色背景 pink background
+# 46：青色背景 cyan background
+# 47：白色背景 white background
+# 格式 format
+# 0：重置所有属性 reset all
+# 1：加粗 bold
+# 4：下划线 underline
+# 5：闪烁 blink
+# 7：反显 reverse
+# 8：隐藏 hide
 
 program_name_color = "35;1"
-
 system_name_color = "33;1"
-
 user_name_color = "32;1"
-
 ai_name_color = "34;1"
-
 ai_print_color = "37;1"
+
+# 目前支持语言 - Currently support: 'en_US', 'zh_CN'
+# 'default'会使用系统环境语言 - will use enviroment language
+language = "default"

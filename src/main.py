@@ -36,8 +36,14 @@ def main():
     主函数 - Main function
     """
 
-    # 获取系统默认的地区设置，可能需要处理一下格式以适配gettext
-    current_locale, encoding = locale.getdefaultlocale()
+    # print(cf.language_select)
+    if cf.language_select.lower() == "default" or cf.language_select == "None":
+        # 获取系统默认的地区设置
+        current_locale = locale.getdefaultlocale()[0]
+    else:
+        current_locale = cf.language_select
+
+    # print(current_locale)
     cf.setup_i18n(current_locale)  # 设置语言
 
 
