@@ -1,11 +1,11 @@
 # This .pot file is for "LaphaeL-aicmd" project's CLI interface
 # Copyright (C) 2024 LaphaeL
-# This file is distributed under the same license as the LaphaeLaicmd-linux package.
+# This file is distributed under the same license as the LaphaeL-aicmd package.
 # LaphaeL12304 LaphaeL12304@gmail.com, 2024.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: LaphaeLaicmd-linux v1.2.3\n"
+"Project-Id-Version: LaphaeL-aicmd v1.2.3\n"
 "Report-Msgid-Bugs-To: https://github.com/LaphaeL12304/LaphaeL-aicmd/issues\n"
 "POT-Creation-Date: 2024-06-02 03:21+0800\n"
 "PO-Revision-Date: N/A\n"
