@@ -4,8 +4,8 @@ import sys
 import os
 
 from . import globals as gl
-_ = gl.translate
 from . import config as cf
+_ = cf.translate
 from . import utils as ut
 from . import execute_cmd
 
