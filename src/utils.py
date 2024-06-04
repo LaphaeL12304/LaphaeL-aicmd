@@ -9,7 +9,7 @@ from . import config as cf
 from . import globals as gl
 
 
-def extract_command(text):
+def extract_command(text) -> str:
     """
     匹配被"///"包裹的文本 - Match text enclosed by "///"
     
@@ -21,7 +21,7 @@ def extract_command(text):
     return match.group(1) if match else ""  # 如果没有匹配项则返回空 - Return empty if no match
 
 
-def set_color(text, color="37"):
+def set_color(text, color: str="37") -> str:
     """
     转为带颜色的字符串 - Convert text to colored string
     
@@ -43,7 +43,7 @@ def print_and_record(text, end='\n'):
     gl.send_buffer += text + end
 
 
-def slow_print(text, print_time=0.10, max_delay=0.01, end='\n', record=True):
+def slow_print(text, print_time: float=0.10, max_delay: float=0.01, end='\n', record: bool=True):
     """
     逐字打印文本 - Print text character by character
     
@@ -74,7 +74,7 @@ def slow_print(text, print_time=0.10, max_delay=0.01, end='\n', record=True):
 
 
 _last_spoker = ""
-def print_spoker(spoker=None, raw_name=None, end='', record=True):
+def print_spoker(spoker: str | None=None, raw_name: str | None=None, end='', record: bool=True):
     """
     打印发言人 - Print speaker
     
@@ -100,7 +100,7 @@ def print_spoker(spoker=None, raw_name=None, end='', record=True):
             gl.send_buffer += spoker + ": " + end
 
 
-def confirm(printstr="Do you agree?", program_name=""):
+def confirm(printstr: str="Do you agree?", program_name: str="") -> bool:
     """
     打印[Y/n]确认界面 - Print [Y/n] confirmation interface
     

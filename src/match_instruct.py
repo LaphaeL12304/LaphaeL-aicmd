@@ -9,7 +9,7 @@ _ = cf.translate
 from . import utils as ut
 from . import execute_cmd
 
-def match_instruction(instruction):
+def match_instruction(instruction: str):
     """
     处理输入的指令 - Process input instructions
     

@@ -4,6 +4,7 @@ import google.generativeai as genai
 from openai import OpenAI
 import requests
 import os
+from abc import ABC, abstractmethod
 
 from . import config as cf
 from . import utils as ut
@@ -16,11 +17,11 @@ os.environ['ALL_PROXY'] = ""
 os.environ['all_proxy'] = ""
 
 
-class Chat_AI():
+class Chat_AI(ABC):
     """所有AI的基类 - Base class for all AIs"""
 
-    def __init__(self, name=cf.ai_name, model=cf.ai_model, \
-                 print_color=cf.ai_name_color, api_key=None, instruction_prompt=""):
+    def __init__(self, name: str=cf.ai_name, model: str=cf.ai_model, \
+                 print_color: str=cf.ai_name_color, api_key: str | None=None, instruction_prompt: str=""):
         """
         初始化Chat_AI类 - Initialize Chat_AI class
 
@@ -38,7 +39,8 @@ class Chat_AI():
         self.ready = False
 
 
-    def interact(self, content, history):
+    @abstractmethod
+    def interact(self, content: str, history: str) -> str:
         """
         与AI进行交互 - Interact with the AI
 
@@ -51,8 +53,9 @@ class Chat_AI():
 class Chat_AI_gemini(Chat_AI):
     """Gemini AI"""
 
-    def __init__(self, name=cf.ai_name, model=cf.ai_model, \
-                 print_color=cf.ai_name_color, api_key=None, instruction_prompt="", init_prompt="如果你能明白我的要求，请回复'准备就绪'"):
+    def __init__(self, name: str=cf.ai_name, model: str=cf.ai_model, \
+                print_color: str=cf.ai_name_color, api_key: str | None=None, instruction_prompt: str="", \
+                init_prompt="If you understand the instructions, please reply 'ready'"):
         """
         初始化Chat_AI_gemini类 - Initialize Chat_AI_gemini class
 
@@ -89,7 +92,7 @@ class Chat_AI_gemini(Chat_AI):
             self.ready = True
 
 
-    def interact(self, content, history):
+    def interact(self, content: str, history: str) -> str:
         """
         与Gemini API进行对话, 并利用流式传输逐字打印回答 - Interact with Gemini API and print responses character by character
 
@@ -120,8 +123,9 @@ class Chat_AI_gemini(Chat_AI):
 class Chat_AI_GPT(Chat_AI):
     """ChatGPT AI"""
 
-    def __init__(self, name=cf.ai_name, model=cf.ai_model, \
-                 print_color=cf.ai_name_color, api_key=None, instruction_prompt="", init_prompt="如果你能明白我的要求，请回复'准备就绪'"):
+    def __init__(self, name: str=cf.ai_name, model: str=cf.ai_model, \
+                print_color: str=cf.ai_name_color, api_key: str | None=None, instruction_prompt: str="", \
+                init_prompt: str="If you understand the instructions, please reply 'ready'"):
         """
         初始化Chat_AI_GPT类 - Initialize Chat_AI_GPT class
 
@@ -155,7 +159,7 @@ class Chat_AI_GPT(Chat_AI):
             self.ready = True
 
 
-    def _initialize_ai(self, init_prompt):
+    def _initialize_ai(self, init_prompt: str) -> str:
         """
         初始化AI - Initialize AI
 
@@ -180,7 +184,7 @@ class Chat_AI_GPT(Chat_AI):
         return ai_text.strip()
 
 
-    def interact(self, content, history):
+    def interact(self, content: str, history: str) -> str:
         """
         与ChatGPT API进行对话，并利用流式传输逐字打印回答 - Interact with ChatGPT API and print responses character by character
 
@@ -217,13 +221,13 @@ class Chat_AI_GPT(Chat_AI):
         return ai_text.strip()
 
 
-def get_ai_class():
+def get_ai_class(name: str=cf.ai_name) -> Chat_AI:
     """
     获取AI类 - Get AI class
 
     :return: AI类 - AI class
     """
-    match cf.ai_name:
+    match name:
         case "ChatGPT":
             return Chat_AI_GPT
         case "Gemini":

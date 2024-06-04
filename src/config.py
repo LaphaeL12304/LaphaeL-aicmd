@@ -82,7 +82,7 @@ for resource_required_ensure_dir in resource_required_ensure:
     ensure_resource_existence(resource_dir,resource_required_ensure_dir, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), resource_required_ensure_dir))
 
 
-def setup_i18n(locale="en_US"):
+def setup_i18n(locale: str="en_US"):
     """
     设置语言 - Set language
 

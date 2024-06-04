@@ -13,7 +13,7 @@ password_prompt = 'password:'
 password_prompt_zh = '密码：'  # 系统的密码提示符 - password prompt of system
 
 
-def clean_backspaces(input_string):
+def clean_backspaces(input_string: str) -> str:
     """
     Remove backspace characters from a string.
     去除字符串中的删除符
@@ -31,7 +31,7 @@ def clean_backspaces(input_string):
     return ''.join(result)
 
 
-def execute_command(command, need_confirm=True, print_result=True):
+def execute_command(command: str, need_confirm: bool=True, print_result: bool=True) -> str:
     """
     Execute a shell command, optionally requiring confirmation and printing the result.
     执行一个shell命令，可选地需要确认并打印结果。
@@ -88,7 +88,7 @@ def execute_command(command, need_confirm=True, print_result=True):
     return clean_backspaces(result.strip())
 
 
-def match_before(before, process):
+def match_before(before: str, process: PtyProcessUnicode) -> bool:
     """
     Match the output content and interact accordingly.
     匹配输出中的内容并进行交互
