@@ -103,9 +103,9 @@ def setup_i18n(locale="en_US"):
 
     if not os.path.exists(mo_path):
         po_path = os.path.join(locale_path, 'po_files', f'{current_locale}.po')
-        print(f"Compiling {po_path} to {mo_path}...")
+        # print(f"Compiling {po_path} to {mo_path}...")
         subprocess.run(['msgfmt', po_path, '-o', mo_path], check=True)
-        print(f"Compiled {mo_path} successfully.")
+        # print(f"Compiled {mo_path} successfully.")
 
     try:
         language = gettext.translation('messages', localedir=resource_locale_path, languages=[current_locale], fallback=True)
