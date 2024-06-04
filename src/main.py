@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# This program is named 'LaphaeLaicmd-linux', it allows chat AI to execute commands on the user's Linux system.
+# This program is named 'LaphaeL-aicmd', it allows chat AI to execute commands on the user's Linux system.
 # 该程序名为'LaphaeLaicmd-linux'，它允许聊天AI在用户的Linux系统上执行命令。
 # Copyright (C) 2024 LaphaeL
 # This program is free software: you can redistribute it and/or modify
