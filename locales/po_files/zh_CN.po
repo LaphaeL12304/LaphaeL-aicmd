@@ -1,12 +1,12 @@
-# This .pot file is for "LaphaeLaicmd-linux" project's CLI interface
+# This .pot file is for "LaphaeL-aicmd" project's CLI interface
 # Copyright (C) 2024 LaphaeL
-# This file is distributed under the same license as the LaphaeLaicmd-linux package.
+# This file is distributed under the same license as the LaphaeL-aicmd package.
 # LaphaeL12304 LaphaeL12304@gmail.com, 2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: LaphaeLaicmd-linux v1.2.3\n"
-"Report-Msgid-Bugs-To: https://github.com/LaphaeL12304/LaphaeLaicmd-linux/"
+"Report-Msgid-Bugs-To: https://github.com/LaphaeL12304/LaphaeL-aicmd/"
 "issues\n"
 "POT-Creation-Date: 2024-06-02 03:21+0800\n"
 "PO-Revision-Date: 2024-06-02 03:39+0800\n"
@@ -98,7 +98,7 @@ msgid ""
 "e.g., \"/cmd whoami\" will execute \"whoami\".\n"
 "\n"
 "To see more informations, you may visit the following links:\n"
-"Github repository: https://github.com/LaphaeL12304/LaphaeLaicmd-linux\n"
+"Github repository: https://github.com/LaphaeL12304/LaphaeL-aicmd\n"
 msgstr ""
 "\n"
 "这个程序是什么：\n"
@@ -121,7 +121,7 @@ msgstr ""
 "\"/cmd\"：将手动执行其后的Linux shell命令，例如，\"/cmd whoami\"将执行\"whoami\"。\n"
 "\n"
 "要了解更多信息，您可以访问以下链接：\n"
-"Github仓库：https://github.com/LaphaeL12304/LaphaeLaicmd-linux\n"
+"Github仓库：https://github.com/LaphaeL12304/LaphaeL-aicmd\n"
 
 #: match_instruct.py:40
 msgid "# Omit help text\n"
