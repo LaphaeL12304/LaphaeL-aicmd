@@ -102,10 +102,13 @@ def setup_i18n(locale: str="en_US"):
         os.makedirs(mo_dir)
 
     if not os.path.exists(mo_path):
-        po_path = os.path.join(locale_path, 'po_files', f'{current_locale}.po')
-        # print(f"Compiling {po_path} to {mo_path}...")
-        subprocess.run(['msgfmt', po_path, '-o', mo_path], check=True)
-        # print(f"Compiled {mo_path} successfully.")
+        try:
+            po_path = os.path.join(locale_path, 'po_files', f'{current_locale}.po')
+            print(f"Compiling {po_path} to {mo_path}...")
+            subprocess.run(['msgfmt', po_path, '-o', mo_path], check=True)
+            print(f"Compiled {mo_path} successfully.")
+        except Exception as e:
+            print(f"Failed to compile {po_path} to {mo_path}.")
 
     try:
         language = gettext.translation('messages', localedir=resource_locale_path, languages=[current_locale], fallback=True)
