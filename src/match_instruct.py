@@ -33,8 +33,7 @@ def match_instruction(instruction):
                 sys.exit(0)
 
             case "/help" | "/帮助" | "/":  # 打印帮助文本 - Print help text
-                cli_outputs_path = os.path.join(cf.project_root, "data", "_cli_outputs.toml")
-                cli_outputs = cf.load_toml_config(cli_outputs_path)
+                cli_outputs = cf.load_toml_config(cf.cli_outputs_path)
                 help_text = cf.get_config_value(cli_outputs, "help_text", "text")
                 ut.slow_print(help_text, record=False)
                 gl.send_buffer += _("# Omit help text\n")

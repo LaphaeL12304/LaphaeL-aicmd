@@ -11,8 +11,12 @@ readme = "README.md"
 homepage = "https://github.com/LaphaeL12304/LaphaeLaicmd-linux"
 repository = "https://github.com/LaphaeL12304/LaphaeLaicmd-linux"
 keywords = ["aicmd", "ai"]
-packages = [{ include = "*.py", from = "src", to = "laphaelaicmd_linux" }]
-include = [{ path = "data", format = ["sdist", "wheel"] }]
+packages = [
+  { include = "*.py", from = "src", to = "laphaelaicmd_linux" },
+  { include = "*", from = "data", to = "laphaelaicmd_linux/data" },
+  { include = "*", from = "locales/po_files", to = "laphaelaicmd_linux/locales/po_files" },
+]
+include = []
 
 [tool.poetry.dependencies]
 python = "^3.10"
