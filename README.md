@@ -1,4 +1,4 @@
-# LaphaeLaicmd-linux
+# LaphaeL-aicmd
 
 - Enable chat AI to execute commands on linux with feedback-loop for multi-step missions
 
@@ -21,8 +21,10 @@
 
 1. Support multi-languages (currently only English and Simplified Chinese)
 2. Added `locales`file
-3. Improved help text when entering `/help` in the program
-4. Improved usage of poetry and nix (thanks to contributions from [DataEraserC](https://github.com/DataEraserC))
+3. Move configurations to `~/.resources` file
+4. Project renamed to `LaphaeL-aicmd`
+5. Improved help text when entering `/help` in the program
+6. Improved usage of poetry and nix (thanks to contributions from [DataEraserC](https://github.com/DataEraserC))
 
 > [!WARNING]
 >
@@ -35,7 +37,7 @@
 
 ### Step One: Download the Program
 
-- [Click me to download from Github](https://github.com/LaphaeL12304/LaphaeLaicmd-linux/archive/refs/heads/main.zip)
+- [Click me to download from Github](https://github.com/LaphaeL12304/LaphaeL-aicmd/archive/refs/heads/main.zip)
 
 ### Step Two: Install Python Dependencies
 
@@ -122,6 +124,6 @@ If you encounter any issues, please inform us through GitHub issues.
 
 ## Links
 
-- [Github Repository](https://github.com/LaphaeL12304/LaphaeLaicmd-linux)
+- [Github Repository](https://github.com/LaphaeL12304/LaphaeL-aicmd)
 - [Bilibili](https://space.bilibili.com/454973135?spm_id_from=333.337.0.0)
 - [qq讨论群](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=hE0n_WloYeCndEoIMKjXK5V13yFhswDC&authKey=escV%2FqTpM7dCaNduH1ibLzhp1rIxMCE%2FiMH07XES9Z3yXC9iWbgWkW4h7nPZ7hHJ&noverify=0&group_code=893275911)
