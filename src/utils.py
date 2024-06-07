@@ -100,7 +100,7 @@ def print_spoker(spoker: str | None=None, raw_name: str | None=None, end='', rec
             gl.send_buffer += spoker + ": " + end
 
 
-def confirm(printstr: str="Do you agree?", program_name: str="") -> bool:
+def confirm(printstr: str="Do you agree?") -> bool:
     """
     打印[Y/n]确认界面 - Print [Y/n] confirmation interface
     
