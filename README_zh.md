@@ -118,9 +118,9 @@
 
 ## 🐛已知问题
 
-- 暂无
+- [#10](https://github.com/LaphaeL12304/LaphaeL-aicmd/issues/10): 由于提示词过长，Gemini有时无法回复 “准备就绪” 或 “ready”
 
-如遇到任何问题，请通过GitHub issues告知我们。
+如遇到任何问题，请通过GitHub issues告知我们：: [点我转到 github issues 页面](https://github.com/LaphaeL12304/LaphaeL-aicmd/issues)
 
 ---
 

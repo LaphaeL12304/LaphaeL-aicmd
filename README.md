@@ -118,9 +118,9 @@ Open the `~/.config/LaphaeLaicmd/data/AI_settings.toml` file (generated after th
 
 ## 🐛Known Issues
 
-- None
+- [#10](https://github.com/LaphaeL12304/LaphaeL-aicmd/issues/10): Gemini might not reply “ready” or “准备就绪” since the instruction prompt is too long
 
-If you encounter any issues, please inform us through GitHub issues.
+If you encounter any issues, please inform us through GitHub issues: [Click me to github issue page](https://github.com/LaphaeL12304/LaphaeL-aicmd/issues)
 
 ---
 
