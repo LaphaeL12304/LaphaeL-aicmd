@@ -4,9 +4,9 @@
 
 ---
 
-# [📄点我查看简体中文版](README_zh.md)
+# [📄 点我查看简体中文版](README_zh.md)
 
-## ✨What is it for?
+## ✨ What is it for?
 
 - Type `aicmd` in the Linux terminal to start
 - Automatically captures Linux commands in AI responses
@@ -17,7 +17,7 @@
 
 ---
 
-## 🎉What's New in V1.2.3
+## 🎉 What's New in V1.2.3
 
 1. Multi-language support (currently only Simplified Chinese and English)
 2. Added `locales` file
@@ -33,7 +33,7 @@
 
 ---
 
-## 🚀How to Get Started
+## 🚀 How to Get Started
 
 ### Step 1: Download the Program
 
@@ -86,7 +86,7 @@ Before running the program each time, you need to start poetry with `poetry shel
 - The first launch requires entering the API key (Gemini's API key can be obtained free from [Google AI Studio](aistudio.google.com))
 - Ensure your network environment can connect to the AI
 
-## 🔧Setting Up AI
+## 🔧 Setting Up AI
 
 Open the `~/.config/LaphaeLaicmd/data/AI_settings.toml` file (generated after the program runs for the first time)
 
@@ -95,7 +95,7 @@ Open the `~/.config/LaphaeLaicmd/data/AI_settings.toml` file (generated after th
 - Change `[info_your-select-ai](api_key)` to set the API key **(must be filled)**
 - Change `[info_your-select-ai](model)` to change the AI model (default is gpt-4o)
 
-## 💡Usage Tutorial
+## 💡 Usage Tutorial
 
 - After entering your request, it is automatically sent to the AI
 - If the AI's reply contains Linux commands, user confirmation is required with `[Y/n]` (pressing Enter also executes)
@@ -116,7 +116,7 @@ Open the `~/.config/LaphaeLaicmd/data/AI_settings.toml` file (generated after th
   - Manually execute a command, e.g., **"example"**:  
     `/cmd example`
 
-## 🐛Known Issues
+## 🐛 Known Issues
 
 - [#10](https://github.com/LaphaeL12304/LaphaeL-aicmd/issues/10): Gemini might not reply “ready” or “准备就绪” since the instruction prompt is too long
 
