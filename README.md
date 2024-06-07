@@ -76,7 +76,7 @@ Before running the program each time, you need to start poetry with `poetry shel
 1. Execute the following command in the Linux terminal to open the file:
    `nano ~/.bashrc`
 2. Add the custom command at the end of the file:
-   `alias aicmd="python3 /path/to/this/program/LaphaeLaicmd-linux/main.py"`
+   `alias aicmd="python3 /path/to/this/program/LaphaeL-aicmd/main.py"`
 3. Run the following command to apply the changes:
    `source ~/.bashrc`
 
