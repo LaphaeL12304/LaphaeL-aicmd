@@ -4,6 +4,7 @@ import google.generativeai as genai
 from openai import OpenAI
 import requests
 import os
+import sys
 from abc import ABC, abstractmethod
 
 from . import config as cf
@@ -233,4 +234,75 @@ def get_ai_class(name: str=cf.ai_name) -> Chat_AI:
         case "Gemini":
             return Chat_AI_gemini
         case _:
-            raise ValueError("Unknown AI class specified in config.py")
+            raise ValueError("Unknown AI class")
+
+global chat_ai
+
+def initialize():
+    global chat_ai
+    # 配置AI - Configure AI
+    print(_("Connecting to") + "\"" + cf.ai_name + "\"...")
+
+    init_prompt = cf.program_name + \
+        ": Here is the custom instruction you should follow in the subsequent conversation:{\n" + \
+        cf.custom_instruct + "}\n" + \
+        "Here is some basic information about the user's system:{\n" + \
+        "System version: " + cf.system_version + "\n" + \
+        "Operating path: " + gl.pwd_path + "\n" + \
+        "User name: " + cf.user_name + "\n}" + \
+        "If you understand the instructions above, please reply " + _("'ready'")
+
+    done = False
+    while not done:
+        # print(cf.ai_name)
+        # 获取AI类 - Get AI class
+        try:
+            chat_ai_class = get_ai_class(cf.ai_name)
+            chat_ai = chat_ai_class(api_key=cf.My_key, instruction_prompt=cf.instruct_prompt, init_prompt=init_prompt)
+            done = True
+        except ValueError:
+            done = False
+            print(_("Failed to obtain AI class: ") + _("Invalid AI class."))
+            result = ut.confirm(_("Try another AI module? "))
+            if result:
+                cf.set_ai_class()
+                cf.set_ai_model()
+                cf.set_api_key()
+                cf.initialize()
+            else:
+                sys.exit(_("Exitting program..."))
+        except Exception as e:
+            done = False
+            print(_("Failed to obtain AI class: ") + str(e))
+            print(_("Please check if your API key is valid."))
+            result = ut.confirm(_("Try another API key? "))
+            if result:
+                cf.set_api_key()
+                cf.initialize()
+            else:
+                result = ut.confirm(_("Try another AI module? "))
+                if result:
+                    cf.set_ai_class()
+                    cf.set_ai_model()
+                    cf.set_api_key()
+                    cf.initialize()
+                else:
+                    sys.exit(_("Exitting program..."))
+
+        if 'chat_ai' in globals() and not chat_ai.ready:
+            done = False
+            print(_("Failed to connect to") + "\"" + cf.ai_name + "\"")
+            print(_("Please check if your API key, network, and AI module are valid."))
+            result = ut.confirm(_("Try another AI module? "))
+            if result:
+                cf.set_ai_class()
+                cf.set_ai_model()
+                cf.set_api_key()
+                cf.initialize()
+            else:
+                sys.exit(_("Exitting program..."))
+
+    # 初始化完成 - Initialization complete
+    ut.print_spoker(record=False)
+    print(_("Connection successed!") + "\"" + cf.ai_name + "\"" + _("have understood the instructions!"))
+    return chat_ai

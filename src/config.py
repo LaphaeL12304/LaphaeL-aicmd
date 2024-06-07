@@ -172,8 +172,6 @@ def setup_i18n(locale: str="en_US"):
 
     except Exception as e:
         print("Error loading the .mo file:", e)
-        _ = lambda x: x
-
 def translate(text):
     return _(text)
 
@@ -186,12 +184,17 @@ ai_settings = load_toml_config(ai_settings_path)
 config = load_toml_config(config_path)
 
 ai_name = get_config_value(ai_settings, "info", "select_ai")
-
 ai_model = get_config_value(ai_settings, f"info_{ai_name}", "model")
 My_key = get_config_value(ai_settings, f"info_{ai_name}", "api_key")
-
-instruction_prompt = get_config_value(ai_settings, "prompt", "text")
+instruct_prompt = get_config_value(ai_settings, "prompt", "text")
 custom_instruct = get_config_value(ai_settings, "custom_instruct", "text")
+def load_ai_settings():
+    global ai_name, ai_model, my_key, instruct_prompt, custom_instruct
+    ai_name = get_config_value(ai_settings, "info", "select_ai")
+    ai_model = get_config_value(ai_settings, f"info_{ai_name}", "model")
+    My_key = get_config_value(ai_settings, f"info_{ai_name}", "api_key")
+    instruct_prompt = get_config_value(ai_settings, "prompt", "text")
+    custom_instruct = get_config_value(ai_settings, "custom_instruct", "text")
 
 
 # 打印的发言人名称颜色
@@ -223,18 +226,16 @@ if __name__ == "__main__":
 def set_api_key():
     global My_key, ai_settings
     if ai_name is None:
-        print("AI name is None")
-        raise ValueError("ai_name")
-    elif ai_model is None:
-        print("AI model is None")
-        raise ValueError("ai_model")
-    else:
-        # 设置API key
-        print(_("Please enter your API key for \"") + ai_name + "\" -- \"" + ai_model + "\": ", end="")
-        My_key = input()
-        change_toml_config(ai_settings_path, ai_settings, f'info_{ai_name}', "api_key", My_key)
-        ai_settings = load_toml_config(ai_settings_path)
-        print(_("API key updated"))
+        set_ai_class()
+    if ai_model is None:
+        set_ai_model()
+
+    # 设置API key
+    print(_("Please enter your API key for \"") + ai_name + "\" -- \"" + ai_model + "\": ", end="")
+    My_key = input()
+    change_toml_config(ai_settings_path, ai_settings, f'info_{ai_name}', "api_key", My_key)
+    ai_settings = load_toml_config(ai_settings_path)
+    print(_("API key updated"))
 
 def set_ai_class():
     global ai_name, ai_settings
@@ -253,6 +254,9 @@ def set_ai_class():
 
 def set_ai_model():
     global ai_model, ai_settings
+    if ai_name is None:
+        set_ai_class()
+
     supported_model = get_config_value(ai_settings, f"info_{ai_name}", "supported_model")
     while True:
         print(_("Supported model: ") + supported_model)
@@ -268,7 +272,16 @@ def set_ai_model():
 
 
 def initialize():
-    global My_key, ai_settings, user_name, system_name, system_version
+    global My_key, ai_settings, user_name, system_name, system_version, \
+        ai_name, ai_model, my_key, instruct_prompt, custom_instruct
+
+    # 读取AI_settings
+    ai_name = get_config_value(ai_settings, "info", "select_ai")
+    ai_model = get_config_value(ai_settings, f"info_{ai_name}", "model")
+    My_key = get_config_value(ai_settings, f"info_{ai_name}", "api_key")
+    instruct_prompt = get_config_value(ai_settings, "prompt", "text")
+    custom_instruct = get_config_value(ai_settings, "custom_instruct", "text")
+
 
     # print(cf.language_select)
     current_locale = locale.getdefaultlocale()[0] if language_select.lower() == "default" \
@@ -288,8 +301,7 @@ def initialize():
 
     # 读取文件 - Read files
     print(_("Getting configurations..."))
-
-    if instruction_prompt == '':
+    if instruct_prompt == '':
         sys.exit(_("'instruct_prompt' is empty"))
     elif custom_instruct == '':
         cf.custom_instruct = "None"
@@ -297,10 +309,7 @@ def initialize():
     # 检查AI配置 - Check AI config
     print(_("Checking AI config..."))
 
-    My_key = get_config_value(ai_settings, f"info_{ai_name}", "api_key")
     #print(ai_name)
     #print(My_key)
     if My_key is None or My_key == "":
         set_api_key()
-
-    

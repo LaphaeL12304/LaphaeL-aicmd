@@ -38,56 +38,9 @@ def main():
 
     ut.print_spoker(record=False)
 
-    cf.initialize()  # 配置信息检测
+    cf.initialize() # 配置信息检测
+    chat_ai = ai.initialize()
 
-    # 配置AI - Configure AI
-    print(_("Connecting to") + "\"" + cf.ai_name + "\"...")
-
-    init_prompt = cf.program_name + \
-        ": Here is the custom instruction you should follow in the subsequent conversation:{\n" + \
-        cf.custom_instruct + "}\n" + \
-        "Here is some basic information about the user's system:{\n" + \
-        "System version: " + cf.system_version + "\n" + \
-        "Operating path: " + gl.pwd_path + "\n" + \
-        "User name: " + cf.user_name + "\n}" + \
-        "If you understand the instructions above, please reply " + _("'ready'")
-
-    # 获取AI类 - Get AI class
-    try:
-        chat_ai_class = ai.get_ai_class()
-        chat_ai = chat_ai_class(api_key=cf.My_key, instruction_prompt=cf.instruction_prompt, init_prompt=init_prompt)
-    except Exception as e:
-        print(_("Failed to obtain AI class: ") + str(e))
-        print(_("Please check if your API key is valid."))
-        result = ut.confirm(_("Try another API key? "))
-        if result:
-            cf.set_api_key()
-            sys.exit(_("API key is reseted. Please restart the program."))
-        else:
-            result = ut.confirm(_("Try another AI module? "))
-            if result:
-                cf.set_ai_class()
-                cf.set_ai_model()
-                cf.set_api_key()
-                sys.exit(_("AI module is reseted. Please restart the program."))
-            else:
-                sys.exit(_("Exitting program..."))
-
-    if not chat_ai.ready:
-        print(_("Failed to connect to") + "\"" + cf.ai_name + "\"")
-        print(_("Please check if your API key, network, and AI module are valid."))
-        result = ut.confirm(_("Try another AI module? "))
-        if result:
-            cf.set_ai_class()
-            cf.set_ai_model()
-            cf.set_api_key()
-            sys.exit(_("AI module is reseted. Please restart the program."))
-        else:
-            sys.exit(_("Exitting program..."))
-
-    # 初始化完成 - Initialization complete
-    ut.print_spoker(record=False)
-    print(_("Connection successed!") + "\"" + cf.ai_name + "\"" + _("have understood the instructions!"))
     print("\"" + cf.program_name + "\"" + _("is now ready!"))
 
     gl.send_buffer = ""
