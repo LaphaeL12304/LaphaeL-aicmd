@@ -3,17 +3,24 @@
 import os
 import shutil
 import toml
-import polib
+# import polib
 import gettext
 import locale
+import distro
 import pkg_resources
+import getpass
 
 def load_toml_config(file_path):
     with open(file_path, 'r', encoding='utf-8') as file:
         config = toml.load(file)
     return config
 
-def save_toml_config(file_path, config):
+def change_toml_config(file_path, config, section: str, key: str, value: str):
+    if section in config:
+        config[section][key] = value
+    else:
+        config[section] = {key: value}
+
     with open(file_path, 'w', encoding='utf-8') as file:
         toml.dump(config, file)
 
@@ -82,6 +89,8 @@ def overwrite_resource(resource_directory: str, target_relative_path: str, sourc
         # 原始路径既不是文件也不是文件夹，抛出异常或处理错误
         raise FileNotFoundError(f"The source packaged resource '{source_packaged_path}' does not exist.")
 
+
+'''
 def compile_po_to_mo(po_path: str, mo_path: str):
     """  
     使用Polib库将.po文件编译为.mo文件。
@@ -112,6 +121,7 @@ def compile_po_to_mo(po_path: str, mo_path: str):
 
     except Exception as e:
         print(f"ErrorOccur: {e} when compiling {po_path} to {mo_path}")
+'''
 
 # 默认从环境变量读取数据文件夹的位置 不存在则回退到默认的位置~/.config/LaphaeLaicmd
 resource_dir = os.getenv('laphaelaicmd_linux_config_dir', os.path.join('~', '.config', 'LaphaeLaicmd'))
@@ -146,18 +156,9 @@ def setup_i18n(locale: str="en_US"):
         os.makedirs(mo_dir, mode=0o755)
 
     if not os.path.exists(mo_path):
-<<<<<<< HEAD
-        try:
-            po_path = os.path.join(locale_path, 'po_files', f'{current_locale}.po')
-            print(f"Compiling {po_path} to {mo_path}...")
-            subprocess.run(['msgfmt', po_path, '-o', mo_path], check=True)
-            print(f"Compiled {mo_path} successfully.")
-        except Exception as e:
-            print(f"Failed to compile {po_path} to {mo_path}.")
-=======
         po_path = os.path.join(resource_locale_path, 'po_files', f'{current_locale}.po')
-        compile_po_to_mo(po_path,mo_path)
->>>>>>> b760228c8fc20038a6b5b2d99d6e5fd9936c80d4
+        # compile_po_to_mo(po_path,mo_path)
+        sys.exit("lost of mo file")
 
     try:
         language = gettext.translation('messages', localedir=resource_locale_path, languages=[current_locale], fallback=True)
@@ -185,12 +186,9 @@ ai_settings = load_toml_config(ai_settings_path)
 config = load_toml_config(config_path)
 
 ai_name = get_config_value(ai_settings, "info", "select_ai")
-if ai_name is not None:
-    ai_model = get_config_value(ai_settings, f"info.{ai_name}", "model")
-    My_key = get_config_value(ai_settings, f"info.{ai_name}", "api_key")
-else:
-    ai_model = None
-    My_key = None
+
+ai_model = get_config_value(ai_settings, f"info_{ai_name}", "model")
+My_key = get_config_value(ai_settings, f"info_{ai_name}", "api_key")
 
 instruction_prompt = get_config_value(ai_settings, "prompt", "text")
 custom_instruct = get_config_value(ai_settings, "custom_instruct", "text")
@@ -220,3 +218,89 @@ if __name__ == "__main__":
     print("API Key:", My_key)
     print("Model:", ai_model)
     print("color:", ai_name_color)
+
+
+def set_api_key():
+    global My_key, ai_settings
+    if ai_name is None:
+        print("AI name is None")
+        raise ValueError("ai_name")
+    elif ai_model is None:
+        print("AI model is None")
+        raise ValueError("ai_model")
+    else:
+        # 设置API key
+        print(_("Please enter your API key for \"") + ai_name + "\" -- \"" + ai_model + "\": ", end="")
+        My_key = input()
+        change_toml_config(ai_settings_path, ai_settings, f'info_{ai_name}', "api_key", My_key)
+        ai_settings = load_toml_config(ai_settings_path)
+        print(_("API key updated"))
+
+def set_ai_class():
+    global ai_name, ai_settings
+    supported_ai = get_config_value(ai_settings, "info", "supported_ai")
+    while True:
+        print(_("Supported classes: ") + supported_ai)
+        print(_("Please enter your selected AI class: "), end="")
+        ai_name = input()
+        if ai_name in supported_ai.split(","):
+            break
+        else:
+            print(_("No such AI class. Please try again."))
+    change_toml_config(ai_settings_path, ai_settings, "info", "select_ai", ai_name)
+    ai_settings = load_toml_config(ai_settings_path)
+    print(_("AI class updated"))
+
+def set_ai_model():
+    global ai_model, ai_settings
+    supported_model = get_config_value(ai_settings, f"info_{ai_name}", "supported_model")
+    while True:
+        print(_("Supported model: ") + supported_model)
+        print(_("Please enter your selected AI model for ") + "\"" + ai_name + "\": ", end="")
+        ai_model = input()
+        if ai_model in supported_model.split(","):
+            break
+        else:
+            print(_("No such AI model. Please try again."))
+    change_toml_config(ai_settings_path, ai_settings, f'info_{ai_name}', "model", ai_model)
+    ai_settings = load_toml_config(ai_settings_path)
+    print(_("AI model updated"))
+
+
+def initialize():
+    global My_key, ai_settings, user_name, system_name, system_version
+
+    # print(cf.language_select)
+    current_locale = locale.getdefaultlocale()[0] if language_select.lower() == "default" \
+        or language_select == "None" else current_locale
+
+    setup_i18n(current_locale)
+
+    print(_("Initializing..."))
+
+    # 获取系统信息 - Get system information
+    print(_("Getting system information..."))
+
+    result = getpass.getuser()
+    user_name = result.replace('\n', '')
+    system_version = distro.version(pretty=True)
+    system_name = distro.name()
+
+    # 读取文件 - Read files
+    print(_("Getting configurations..."))
+
+    if instruction_prompt == '':
+        sys.exit(_("'instruct_prompt' is empty"))
+    elif custom_instruct == '':
+        cf.custom_instruct = "None"
+
+    # 检查AI配置 - Check AI config
+    print(_("Checking AI config..."))
+
+    My_key = get_config_value(ai_settings, f"info_{ai_name}", "api_key")
+    #print(ai_name)
+    #print(My_key)
+    if My_key is None or My_key == "":
+        set_api_key()
+
+    
