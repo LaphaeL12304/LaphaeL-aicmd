@@ -1,0 +1,150 @@
+# This .pot file is for "LaphaeL-aicmd" project's CLI interface
+# Copyright (C) 2024 LaphaeL
+# This file is distributed under the same license as the LaphaeL-aicmd package.
+# LaphaeL12304 LaphaeL12304@gmail.com, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: LaphaeL-aicmd v1.2.3\n"
+"Report-Msgid-Bugs-To: https://github.com/LaphaeL12304/LaphaeL-aicmd/issues\n"
+"POT-Creation-Date: 2024-06-07 15:03+0800\n"
+"PO-Revision-Date: N/A\n"
+"Last-Translator: LaphaeL12304 LaphaeL12304@gmail.com\n"
+"Language-Team: N/A\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/interact_AI.py:244
+msgid "Connecting to"
+msgstr ""
+
+#: src/interact_AI.py:253
+msgid "'ready'"
+msgstr ""
+
+#: src/interact_AI.py:266 src/interact_AI.py:277
+msgid "Failed to obtain AI class: "
+msgstr ""
+
+#: src/interact_AI.py:266
+msgid "Invalid AI class."
+msgstr ""
+
+#: src/interact_AI.py:267 src/interact_AI.py:284 src/interact_AI.py:297
+msgid "Try another AI module? "
+msgstr ""
+
+#: src/interact_AI.py:274 src/interact_AI.py:291 src/interact_AI.py:304
+#: src/match_instruct.py:32
+msgid "Exitting program..."
+msgstr ""
+
+#: src/interact_AI.py:278
+msgid "Please check if your API key is valid."
+msgstr ""
+
+#: src/interact_AI.py:279
+msgid "Try another API key? "
+msgstr ""
+
+#: src/interact_AI.py:295
+msgid "Failed to connect to"
+msgstr ""
+
+#: src/interact_AI.py:296
+msgid "Please check if your API key, network, and AI module are valid."
+msgstr ""
+
+#: src/interact_AI.py:308
+msgid "Connection successed!"
+msgstr ""
+
+#: src/interact_AI.py:308
+msgid "have understood the instructions!"
+msgstr ""
+
+#: src/main.py:44
+msgid "is now ready!"
+msgstr ""
+
+#: src/config.py:236
+msgid "Please enter your API key for "
+msgstr ""
+
+#: src/config.py:241
+msgid "API key updated"
+msgstr ""
+
+#: src/config.py:247
+msgid "Supported classes: "
+msgstr ""
+
+#: src/config.py:248
+msgid "Please enter your selected AI class: "
+msgstr ""
+
+#: src/config.py:253
+msgid "No such AI class. Please try again."
+msgstr ""
+
+#: src/config.py:256
+msgid "AI class updated"
+msgstr ""
+
+#: src/config.py:265
+msgid "Supported model: "
+msgstr ""
+
+#: src/config.py:266
+msgid "Please enter your selected AI model for "
+msgstr ""
+
+#: src/config.py:272
+msgid "No such AI model. Please try again."
+msgstr ""
+
+#: src/config.py:275
+msgid "AI model updated"
+msgstr ""
+
+#: src/config.py:296
+msgid "Initializing..."
+msgstr ""
+
+#: src/config.py:299
+msgid "Getting system information..."
+msgstr ""
+
+#: src/config.py:307
+msgid "Getting configurations..."
+msgstr ""
+
+#: src/config.py:309
+msgid "'instruct_prompt' is empty"
+msgstr ""
+
+#: src/config.py:314
+msgid "Checking AI config..."
+msgstr ""
+
+#: src/match_instruct.py:39
+msgid "# Omit help text\n"
+msgstr ""
+
+#: src/match_instruct.py:42
+msgid "Here is the content to be sent to AI: \n"
+msgstr ""
+
+#: src/match_instruct.py:43
+msgid "# Omit printed content\n"
+msgstr ""
+
+#: src/match_instruct.py:47
+msgid "Content is cleared"
+msgstr ""
+
+#: src/match_instruct.py:50
+msgid "No such command, you may enter '/help' for more information"
+msgstr ""
