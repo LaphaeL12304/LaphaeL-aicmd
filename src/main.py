@@ -36,37 +36,9 @@ def main():
     主函数 - Main function
     """
 
-    # print(cf.language_select)
-    if cf.language_select.lower() == "default" or cf.language_select == "None":
-        # 获取系统默认的地区设置
-        current_locale = locale.getdefaultlocale()[0]
-    else:
-        current_locale = cf.language_select
-
-    # print(current_locale)
-    cf.setup_i18n(current_locale)  # 设置语言
-
-
-    # 打印初始化信息 - Print initialization information
     ut.print_spoker(record=False)
-    print(_("Initializing..."))
 
-    # 获取系统信息 - Get system information
-    print(_("Getting system information..."))
-
-    gl.pwd_path = os.getcwd()
-    result = getpass.getuser()
-    cf.user_name = result.replace('\n', '')
-    cf.system_version = distro.version(pretty=True)
-    cf.system_name = distro.name()
-
-    # 读取文件 - Read files
-    print(_("Getting configurations..."))
-
-    if cf.instruction_prompt == '':
-        sys.exit(_("'instruct_prompt' is empty"))
-    elif cf.custom_instruct == '':
-        cf.custom_instruct = "None"
+    cf.initialize()  # 配置信息检测
 
     # 配置AI - Configure AI
     print(_("Connecting to") + "\"" + cf.ai_name + "\"...")
@@ -85,10 +57,33 @@ def main():
         chat_ai_class = ai.get_ai_class()
         chat_ai = chat_ai_class(api_key=cf.My_key, instruction_prompt=cf.instruction_prompt, init_prompt=init_prompt)
     except Exception as e:
-        sys.exit(_("Failed to obtain AI class: ") + str(e))
+        print(_("Failed to obtain AI class: ") + str(e))
+        print(_("Please check if your API key is valid."))
+        result = ut.confirm(_("Try another API key? "))
+        if result:
+            cf.set_api_key()
+            sys.exit(_("API key is reseted. Please restart the program."))
+        else:
+            result = ut.confirm(_("Try another AI module? "))
+            if result:
+                cf.set_ai_class()
+                cf.set_ai_model()
+                cf.set_api_key()
+                sys.exit(_("AI module is reseted. Please restart the program."))
+            else:
+                sys.exit(_("Exitting program..."))
 
     if not chat_ai.ready:
-        sys.exit(_("Failed to connect to") + "\"" + cf.ai_name + "\"")
+        print(_("Failed to connect to") + "\"" + cf.ai_name + "\"")
+        print(_("Please check if your API key, network, and AI module are valid."))
+        result = ut.confirm(_("Try another AI module? "))
+        if result:
+            cf.set_ai_class()
+            cf.set_ai_model()
+            cf.set_api_key()
+            sys.exit(_("AI module is reseted. Please restart the program."))
+        else:
+            sys.exit(_("Exitting program..."))
 
     # 初始化完成 - Initialization complete
     ut.print_spoker(record=False)
