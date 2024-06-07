@@ -83,7 +83,7 @@ Before running the program each time, you need to start poetry with `poetry shel
 ### Step 4: Launch
 
 - Launch the program by typing `aicmd` in the terminal
-- The first launch requires entering the API key (Gemini's API key can be obtained free from[Google AI Studio](aistudio.google.com))
+- The first launch requires entering the API key (Gemini's API key can be obtained free from [Google AI Studio](aistudio.google.com))
 - Ensure your network environment can connect to the AI
 
 ## 🔧Setting Up AI
