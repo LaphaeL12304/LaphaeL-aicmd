@@ -46,7 +46,7 @@ None
 [info]
 select_ai = "ChatGPT" # 目前支持'ChatGPT'和'Gemini' - Currently support 'ChatGPT' and 'Gemini'
 
-[info.ChatGPT]
+[info_ChatGPT]
 api_key = "" # 更改成你的API - Change to your API key
 model = "gpt-4o" 
 
@@ -57,7 +57,7 @@ model = "gpt-4o"
 # gpt-3.5-turbo-0125
 # gpt-3.5-turbo-instruct
 
-[info.Gemini]
+[info_Gemini]
 api_key = "" # 更改成你的API - Change to your API key
 model = "gemini-pro"
 
