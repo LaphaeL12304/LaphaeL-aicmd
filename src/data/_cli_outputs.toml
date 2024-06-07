@@ -1,0 +1,21 @@
+[help_text]
+text = """
+\nWhat is this program:\n\
+This program is named \"LaphaeL-aicmd\", it enables chat AI to execute commands on linux with feedback-loop for multi-step missions \n\
+This program is released under GNU v3, you may see \"LICENSE\" file to see more informations\n\
+\nUsage tutorial:\n\
+- Enter \"aicmd\" in linux terminal to start this program\n\
+- You may edit \"data/AI_settings.toml\" to set API and select AI model (Setting API is required)\n\
+- Since the program starts, you may type to chat with the AI (e.g., \"Please help me install chrome\")\n\
+- Request from AI may include linux shell command, which require user's \"[Y/n]\" confirm to execute (Press Enter will also execute)\n\
+- You may type text starting with \"/\" to use program instructions\n\
+\nProgram instructions:\n\
+These instructions can be runned by entering the following commands after the program starts.\n\
+\"/help\" : Print help text\n\
+\"/exit\" : Exit \"aicmd\" program\n\
+\"/content\" : This will print the content to be appended to the AI in the next request, including the user's manually executed commands and the system's output
+\"/clear\" : This will clear the content to be appended to the AI (Only clear new contents, chat history won't be cleared)
+\"/cmd\" : This will manually execute the linux shell command following it, e.g., \"/cmd whoami\" will execute \"whoami\"\
+\nTo see more informations, you may visit the following links:\n\
+Github repository: https://github.com/LaphaeL12304/LaphaeL-aicmd\n
+"""

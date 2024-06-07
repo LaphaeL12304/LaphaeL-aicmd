@@ -1,0 +1,155 @@
+# This .pot file is for "LaphaeL-aicmd" project's CLI interface
+# Copyright (C) 2024 LaphaeL
+# This file is distributed under the same license as the LaphaeL-aicmd package.
+# LaphaeL12304 LaphaeL12304@gmail.com, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: LaphaeL-aicmd v1.2.3\n"
+"Report-Msgid-Bugs-To: https://github.com/LaphaeL12304/LaphaeL-aicmd/"
+"issues\n"
+"POT-Creation-Date: 2024-06-02 03:21+0800\n"
+"PO-Revision-Date: 2024-06-02 03:38+0800\n"
+"Last-Translator: LaphaeL <laphael12304@gmail.com>\n"
+"Language-Team: English\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: main.py:41
+msgid "Initializing..."
+msgstr "Initializing..."
+
+#: main.py:44
+msgid "Getting system information..."
+msgstr "Getting system information..."
+
+#: main.py:53
+msgid "Getting configurations..."
+msgstr "Getting configurations..."
+
+#: main.py:56
+msgid "'instruct_prompt' is empty"
+msgstr "'instruct_prompt' is empty"
+
+#: main.py:61
+msgid "Connecting to"
+msgstr "Connecting to"
+
+#: main.py:70
+msgid "'ready'"
+msgstr "'ready'"
+
+#: main.py:77
+msgid "Failed to obtain AI class: "
+msgstr "Failed to obtain AI class: "
+
+#: main.py:80
+msgid "Failed to connect to"
+msgstr "Failed to connect to"
+
+#: main.py:84
+msgid "Connection successed!"
+msgstr "Connection successed!"
+
+#: main.py:84
+msgid "have understood the instructions!"
+msgstr "have understood the instructions!"
+
+#: main.py:85
+msgid "is now ready!"
+msgstr "is now ready!"
+
+#: match_instruct.py:32
+msgid "Exitting program..."
+msgstr "Exitting program..."
+
+#: match_instruct.py:39
+msgid ""
+"\n"
+"What is this program:\n"
+"This program is named \"LaphaeLaicmd-linux\", it enables chat AI to execute "
+"commands on linux with feedback-loop for multi-step missions.\n"
+"This program is released under GNU v3, you may see \"LICENSE\" file to see "
+"more informations.\n"
+"\n"
+"Usage tutorial:\n"
+"- Enter \"aicmd\" in linux terminal to start this program.\n"
+"- You may edit \"data/AI_settings.toml\" to set API and select AI model "
+"(Setting API is required).\n"
+"- Since the program starts, you may type to chat with the AI (e.g., \"Please "
+"help me install chrome\").\n"
+"- Request from AI may include linux shell command, which require user's "
+"\"[Y/n]\" confirm to execute (Press Enter will also execute).\n"
+"- You may type text starting with \"/\" to use program instructions.\n"
+"\n"
+"Program instructions:\n"
+"These instructions can be run by entering the following commands after the "
+"program starts.\n"
+"\"/help\" : Print help text.\n"
+"\"/exit\" : Exit \"aicmd\" program.\n"
+"\"/content\" : This will print the content to be appended to the AI in the "
+"next request, including the user's manually executed commands and the system's "
+"output.\n"
+"\"/clear\" : This will clear the content to be appended to the AI (Only clear "
+"new contents, chat history won't be cleared).\n"
+"\"/cmd\" : This will manually execute the linux shell command following it, "
+"e.g., \"/cmd whoami\" will execute \"whoami\".\n"
+"\n"
+"To see more informations, you may visit the following links:\n"
+"Github repository: https://github.com/LaphaeL12304/LaphaeL-aicmd\n"
+msgstr ""
+"\n"
+"What is this program:\n"
+"This program is named \"LaphaeLaicmd-linux\", it enables chat AI to execute "
+"commands on linux with feedback-loop for multi-step missions.\n"
+"This program is released under GNU v3, you may see \"LICENSE\" file to see "
+"more informations.\n"
+"\n"
+"Usage tutorial:\n"
+"- Enter \"aicmd\" in linux terminal to start this program.\n"
+"- You may edit \"data/AI_settings.toml\" to set API and select AI model "
+"(Setting API is required).\n"
+"- Since the program starts, you may type to chat with the AI (e.g., \"Please "
+"help me install chrome\").\n"
+"- Request from AI may include linux shell command, which require user's "
+"\"[Y/n]\" confirm to execute (Press Enter will also execute).\n"
+"- You may type text starting with \"/\" to use program instructions.\n"
+"\n"
+"Program instructions:\n"
+"These instructions can be run by entering the following commands after the "
+"program starts.\n"
+"\"/help\" : Print help text.\n"
+"\"/exit\" : Exit \"aicmd\" program.\n"
+"\"/content\" : This will print the content to be appended to the AI in the "
+"next request, including the user's manually executed commands and the system's "
+"output.\n"
+"\"/clear\" : This will clear the content to be appended to the AI (Only clear "
+"new contents, chat history won't be cleared).\n"
+"\"/cmd\" : This will manually execute the linux shell command following it, "
+"e.g., \"/cmd whoami\" will execute \"whoami\".\n"
+"\n"
+"To see more informations, you may visit the following links:\n"
+"Github repository: https://github.com/LaphaeL12304/LaphaeL-aicmd\n"
+
+#: match_instruct.py:40
+msgid "# Omit help text\n"
+msgstr "# Omit help text\n"
+
+#: match_instruct.py:43
+msgid "Here is the content to be sent to AI: \n"
+msgstr "Here is the content to be sent to AI: \n"
+
+#: match_instruct.py:44
+msgid "# Omit printed content\n"
+msgstr "# Omit printed content\n"
+
+#: match_instruct.py:48
+msgid "Content is cleared"
+msgstr "Content is cleared"
+
+#: match_instruct.py:51
+msgid "No such command, you may enter '/help' for more information"
+msgstr "No such command, you may enter '/help' for more information"
