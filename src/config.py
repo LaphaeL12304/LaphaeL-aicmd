@@ -10,6 +10,8 @@ import distro
 import pkg_resources
 import getpass
 
+from .utils import set_color
+
 def load_toml_config(file_path):
     with open(file_path, 'r', encoding='utf-8') as file:
         config = toml.load(file)
@@ -224,14 +226,15 @@ if __name__ == "__main__":
 
 
 def set_api_key():
-    global My_key, ai_settings
-    if ai_name is None:
+    global My_key, ai_model, ai_name, ai_settings
+    if ai_name is None or ai_name == "":
         set_ai_class()
-    if ai_model is None:
+    if ai_model is None or ai_model == "":
         set_ai_model()
 
     # 设置API key
-    print(_("Please enter your API key for \"") + ai_name + "\" -- \"" + ai_model + "\": ", end="")
+    print(set_color(_("Please enter your API key for "), program_name_color) + "\"" + \
+        set_color(ai_name, ai_name_color) + "\" -- \"" + set_color(ai_model, ai_name_color) + "\": ", end="")
     My_key = input()
     change_toml_config(ai_settings_path, ai_settings, f'info_{ai_name}', "api_key", My_key)
     ai_settings = load_toml_config(ai_settings_path)
@@ -241,31 +244,32 @@ def set_ai_class():
     global ai_name, ai_settings
     supported_ai = get_config_value(ai_settings, "info", "supported_ai")
     while True:
-        print(_("Supported classes: ") + supported_ai)
-        print(_("Please enter your selected AI class: "), end="")
+        print(set_color(_("Supported classes: "), program_name_color) + supported_ai)
+        print(set_color(_("Please enter your selected AI class: "), program_name_color), end="")
         ai_name = input()
         if ai_name in supported_ai.split(","):
             break
         else:
-            print(_("No such AI class. Please try again."))
+            print(set_color(_("No such AI class. Please try again."), program_name_color))
     change_toml_config(ai_settings_path, ai_settings, "info", "select_ai", ai_name)
     ai_settings = load_toml_config(ai_settings_path)
     print(_("AI class updated"))
 
 def set_ai_model():
-    global ai_model, ai_settings
-    if ai_name is None:
+    global ai_model, ai_name, ai_settings
+    if ai_name is None or ai_name == "":
         set_ai_class()
 
     supported_model = get_config_value(ai_settings, f"info_{ai_name}", "supported_model")
     while True:
-        print(_("Supported model: ") + supported_model)
-        print(_("Please enter your selected AI model for ") + "\"" + ai_name + "\": ", end="")
+        print(set_color(_("Supported model: "), program_name_color) + supported_model)
+        print(set_color(_("Please enter your selected AI model for "), program_name_color) + "\"" + \
+            set_color(ai_name, ai_name_color) + "\": ", end="")
         ai_model = input()
         if ai_model in supported_model.split(","):
             break
         else:
-            print(_("No such AI model. Please try again."))
+            print(set_color(_("No such AI model. Please try again."), program_name_color))
     change_toml_config(ai_settings_path, ai_settings, f'info_{ai_name}', "model", ai_model)
     ai_settings = load_toml_config(ai_settings_path)
     print(_("AI model updated"))

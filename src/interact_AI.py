@@ -258,12 +258,13 @@ def initialize():
         # 获取AI类 - Get AI class
         try:
             chat_ai_class = get_ai_class(cf.ai_name)
-            chat_ai = chat_ai_class(api_key=cf.My_key, instruction_prompt=cf.instruct_prompt, init_prompt=init_prompt)
+            chat_ai = chat_ai_class(api_key=cf.My_key, instruction_prompt=cf.instruct_prompt, \
+                init_prompt=init_prompt, name=cf.ai_name, model=cf.ai_model)
             done = True
         except ValueError:
             done = False
             print(_("Failed to obtain AI class: ") + _("Invalid AI class."))
-            result = ut.confirm(_("Try another AI module? "))
+            result = ut.confirm(ut.set_color(_("Try another AI module? "), cf.program_name_color))
             if result:
                 cf.set_ai_class()
                 cf.set_ai_model()
@@ -275,12 +276,12 @@ def initialize():
             done = False
             print(_("Failed to obtain AI class: ") + str(e))
             print(_("Please check if your API key is valid."))
-            result = ut.confirm(_("Try another API key? "))
+            result = ut.confirm(ut.set_color(_("Try another API key? "), cf.program_name_color))
             if result:
                 cf.set_api_key()
                 cf.initialize()
             else:
-                result = ut.confirm(_("Try another AI module? "))
+                result = ut.confirm(ut.set_color(_("Try another AI module? "), cf.program_name_color))
                 if result:
                     cf.set_ai_class()
                     cf.set_ai_model()
