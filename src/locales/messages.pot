@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LaphaeL-aicmd v1.2.3\n"
 "Report-Msgid-Bugs-To: https://github.com/LaphaeL12304/LaphaeL-aicmd/issues\n"
-"POT-Creation-Date: 2024-06-02 03:21+0800\n"
+"POT-Creation-Date: 2024-06-07 15:03+0800\n"
 "PO-Revision-Date: N/A\n"
 "Last-Translator: LaphaeL12304 LaphaeL12304@gmail.com\n"
 "Language-Team: N/A\n"
@@ -16,107 +16,135 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: main.py:41
-msgid "Initializing..."
-msgstr ""
-
-#: main.py:44
-msgid "Getting system information..."
-msgstr ""
-
-#: main.py:53
-msgid "Getting configurations..."
-msgstr ""
-
-#: main.py:56
-msgid "'instruct_prompt' is empty"
-msgstr ""
-
-#: main.py:61
+#: src/interact_AI.py:244
 msgid "Connecting to"
 msgstr ""
 
-#: main.py:70
+#: src/interact_AI.py:253
 msgid "'ready'"
 msgstr ""
 
-#: main.py:77
+#: src/interact_AI.py:266 src/interact_AI.py:277
 msgid "Failed to obtain AI class: "
 msgstr ""
 
-#: main.py:80
-msgid "Failed to connect to"
+#: src/interact_AI.py:266
+msgid "Invalid AI class."
 msgstr ""
 
-#: main.py:84
-msgid "Connection successed!"
+#: src/interact_AI.py:267 src/interact_AI.py:284 src/interact_AI.py:297
+msgid "Try another AI module? "
 msgstr ""
 
-#: main.py:84
-msgid "have understood the instructions!"
-msgstr ""
-
-#: main.py:85
-msgid "is now ready!"
-msgstr ""
-
-#: match_instruct.py:32
+#: src/interact_AI.py:274 src/interact_AI.py:291 src/interact_AI.py:304
+#: src/match_instruct.py:32
 msgid "Exitting program..."
 msgstr ""
 
-#: match_instruct.py:39
-msgid ""
-"\n"
-"What is this program:\n"
-"This program is named \"LaphaeLaicmd-linux\", it enables chat AI to execute "
-"commands on linux with feedback-loop for multi-step missions.\n"
-"This program is released under GNU v3, you may see \"LICENSE\" file to see "
-"more informations.\n"
-"\n"
-"Usage tutorial:\n"
-"- Enter \"aicmd\" in linux terminal to start this program.\n"
-"- You may edit \"data/AI_settings.toml\" to set API and select AI model "
-"(Setting API is required).\n"
-"- Since the program starts, you may type to chat with the AI (e.g., \"Please "
-"help me install chrome\").\n"
-"- Request from AI may include linux shell command, which require user's "
-"\"[Y/n]\" confirm to execute (Press Enter will also execute).\n"
-"- You may type text starting with \"/\" to use program instructions.\n"
-"\n"
-"Program instructions:\n"
-"These instructions can be run by entering the following commands after the "
-"program starts.\n"
-"\"/help\" : Print help text.\n"
-"\"/exit\" : Exit \"aicmd\" program.\n"
-"\"/content\" : This will print the content to be appended to the AI in the "
-"next request, including the user's manually executed commands and the system's "
-"output.\n"
-"\"/clear\" : This will clear the content to be appended to the AI (Only clear "
-"new contents, chat history won't be cleared).\n"
-"\"/cmd\" : This will manually execute the linux shell command following it, "
-"e.g., \"/cmd whoami\" will execute \"whoami\".\n"
-"\n"
-"To see more informations, you may visit the following links:\n"
-"Github repository: https://github.com/LaphaeL12304/LaphaeL-aicmd\n"
+#: src/interact_AI.py:278
+msgid "Please check if your API key is valid."
 msgstr ""
 
+#: src/interact_AI.py:279
+msgid "Try another API key? "
+msgstr ""
 
-#: match_instruct.py:40
+#: src/interact_AI.py:295
+msgid "Failed to connect to"
+msgstr ""
+
+#: src/interact_AI.py:296
+msgid "Please check if your API key, network, and AI module are valid."
+msgstr ""
+
+#: src/interact_AI.py:308
+msgid "Connection successed!"
+msgstr ""
+
+#: src/interact_AI.py:308
+msgid "have understood the instructions!"
+msgstr ""
+
+#: src/main.py:44
+msgid "is now ready!"
+msgstr ""
+
+#: src/config.py:236
+msgid "Please enter your API key for "
+msgstr ""
+
+#: src/config.py:241
+msgid "API key updated"
+msgstr ""
+
+#: src/config.py:247
+msgid "Supported classes: "
+msgstr ""
+
+#: src/config.py:248
+msgid "Please enter your selected AI class: "
+msgstr ""
+
+#: src/config.py:253
+msgid "No such AI class. Please try again."
+msgstr ""
+
+#: src/config.py:256
+msgid "AI class updated"
+msgstr ""
+
+#: src/config.py:265
+msgid "Supported model: "
+msgstr ""
+
+#: src/config.py:266
+msgid "Please enter your selected AI model for "
+msgstr ""
+
+#: src/config.py:272
+msgid "No such AI model. Please try again."
+msgstr ""
+
+#: src/config.py:275
+msgid "AI model updated"
+msgstr ""
+
+#: src/config.py:296
+msgid "Initializing..."
+msgstr ""
+
+#: src/config.py:299
+msgid "Getting system information..."
+msgstr ""
+
+#: src/config.py:307
+msgid "Getting configurations..."
+msgstr ""
+
+#: src/config.py:309
+msgid "'instruct_prompt' is empty"
+msgstr ""
+
+#: src/config.py:314
+msgid "Checking AI config..."
+msgstr ""
+
+#: src/match_instruct.py:39
 msgid "# Omit help text\n"
 msgstr ""
 
-#: match_instruct.py:43
+#: src/match_instruct.py:42
 msgid "Here is the content to be sent to AI: \n"
 msgstr ""
 
-#: match_instruct.py:44
+#: src/match_instruct.py:43
 msgid "# Omit printed content\n"
 msgstr ""
 
-#: match_instruct.py:48
+#: src/match_instruct.py:47
 msgid "Content is cleared"
 msgstr ""
 
-#: match_instruct.py:51
+#: src/match_instruct.py:50
 msgid "No such command, you may enter '/help' for more information"
 msgstr ""
