@@ -12,9 +12,10 @@ homepage = "https://github.com/LaphaeL12304/LaphaeLaicmd-linux"
 repository = "https://github.com/LaphaeL12304/LaphaeLaicmd-linux"
 keywords = ["aicmd", "ai"]
 packages = [
-  { include = "*.py", from = "src", to = "laphaelaicmd_linux" },
-  { include = "*", from = "data", to = "laphaelaicmd_linux/data" },
-  { include = "*", from = "locales/po_files", to = "laphaelaicmd_linux/locales/po_files" },
+  { include = "*", from = "src", to = "laphael_aicmd", format = [
+    "sdist",
+    "wheel",
+  ] },
 ]
 include = []
 
@@ -24,11 +25,13 @@ google-generativeai = "^0.5.3"
 openai = "^1.30.1"
 ptyprocess = "^0.7.0"
 toml = "^0.10.2"
+setuptools = "*"
+polib = "^1.2.0"
 
 [tool.poetry.scripts]
-aicmd = 'laphaelaicmd_linux:cli'
-laphaelaicmd_linux = 'laphaelaicmd_linux:cli'
-laphaelaicmd-linux = 'laphaelaicmd_linux:cli'
+aicmd = 'laphael_aicmd:cli'
+laphael_aicmd = 'laphael_aicmd:cli'
+laphael-aicmd = 'laphael_aicmd:cli'
 
 [build-system]
 requires = ["poetry-core"]
