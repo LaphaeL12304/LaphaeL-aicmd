@@ -6,7 +6,7 @@
 
 # [📄Click me to see English version](README.md)
 
-## ✨它有什么用？
+## ✨ 它有什么用？
 
 - 在Linux终端输入`aicmd`即可启动
 - 自动捕获AI响应中的Linux命令
@@ -17,7 +17,7 @@
 
 ---
 
-## 🎉V1.2.3更新内容
+## 🎉 V1.2.3更新内容
 
 1. 支持多语言 (目前仅简中和英文)
 2. 增加`locales`文件
@@ -33,7 +33,7 @@
 
 ---
 
-## 🚀如何开始
+## 🚀 如何开始
 
 ### 第一步：下载程序
 
@@ -76,17 +76,17 @@
 1. 在Linux终端执行以下命令以打开文件：  
    `nano ~/.bashrc`
 2. 在文件末尾添加自定义命令：  
-   `alias aicmd="python3 此程序所在的目录/LaphaeLaicmd-linux/main.py"`
+   `alias aicmd="python3 此程序所在的目录/LaphaeL-aicmd/main.py"`
 3. 运行以下命令以应用更改：
    `source ~/.bashrc`
 
 ### 第四步：启动
 
 - 从终端输入`aicmd`即可启动程序
-- 首次启动需要输入API key
+- 首次启动需要输入API key (Gemini的API key可以从 [Google AI Studio](aistudio.google.com) 免费获取)
 - 请确保你的网络环境可以连接到AI
 
-## 🔧设置AI
+## 🔧 设置AI
 
 打开`~/.config/LaphaeLaicmd/data/AI_settings.toml`文件 (程序首次运行后才会生成)
 
@@ -95,7 +95,7 @@
 - 更改`[info_your-select-ai](api_key)`以设置API密钥 **(必须填写)**
 - 更改`[info_your-select-ai](model)`以更换AI模型 (默认为gpt-4o)
 
-## 💡使用教程
+## 💡 使用教程
 
 - 输入你的需求后自动发送给AI
 - AI的回复如果带着Linux命令，则需要用户进行`[Y/n]`确认 (直接回车也会执行)
@@ -116,7 +116,7 @@
   - 手动执行某命令，e.g. **"example"**：  
     `/cmd example`
 
-## 🐛已知问题
+## 🐛 已知问题
 
 - [#10](https://github.com/LaphaeL12304/LaphaeL-aicmd/issues/10): 由于提示词过长，Gemini有时无法回复 “准备就绪” 或 “ready”
 
