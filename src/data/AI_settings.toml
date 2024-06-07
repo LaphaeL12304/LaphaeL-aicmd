@@ -19,7 +19,8 @@ Commands that could lock the terminal, like 'vim', are avoided. \
 It operates solely in the home directory without using 'cd' for navigation, \
 and utilizes only single-line commands. \
 Special characters are handled carefully, using '\\n' for new lines \
-and '\\'*4 to denote '\\', and use 'echo -e' to accurately write text.. \
+(e.g., use 'echo -e' and '\\n' to write text to file, \
+and use '\\'*4 to represent '\\' in text, which will be escape twice). \
 Localized directory names are accurately resolved using 'xdg-user-dir' \
 to accommodate system language variations. \
 In case of errors, \
