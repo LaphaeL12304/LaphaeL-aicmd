@@ -4,9 +4,9 @@
 
 ---
 
-# [点我查看简体中文版](README_zh.md)
+# [📄点我查看简体中文版](README_zh.md)
 
-## What is it for?
+## ✨What is it for?
 
 - Type `aicmd` in the Linux terminal to start
 - Automatically captures Linux commands in AI responses
@@ -17,14 +17,14 @@
 
 ---
 
-## V1.2.3 Update
+## 🎉What's New in V1.2.3
 
-1. Support multi-languages (currently only English and Simplified Chinese)
-2. Added `locales`file
-3. Move configurations to `~/.resources` file
+1. Multi-language support (currently only Simplified Chinese and English)
+2. Added `locales` file
+3. Moved configuration files to `~/.config` folder
 4. Project renamed to `LaphaeL-aicmd`
-5. Improved help text when entering `/help` in the program
-6. Improved usage of poetry and nix (thanks to contributions from [DataEraserC](https://github.com/DataEraserC))
+5. Improved help documentation printed when entering `/help`
+6. Optimized use of poetry and nix (thanks to code contributions from [DataEraserC](https://github.com/DataEraserC))
 
 > [!WARNING]
 >
@@ -33,67 +33,69 @@
 
 ---
 
-## How to setup
+## 🚀How to Get Started
 
-### Step One: Download the Program
+### Step 1: Download the Program
 
-- [Click me to download from Github](https://github.com/LaphaeL12304/LaphaeL-aicmd/archive/refs/heads/main.zip)
+- [Click here to download from Github](https://github.com/LaphaeL12304/LaphaeL-aicmd/archive/refs/heads/main.zip)
 
-### Step Two: Install Python Dependencies
+### Step 2: Install Python Dependencies
 
-#### Method 1 - Using poetry to install dependencies (suitable for development):
+#### Method 1 - Install dependencies using poetry (suitable for development):
 
-1. Install poetry with the following command:  
+1. Install poetry with the following command:
    `pip install poetry`
 
-2. Add an environment variable:
+2. Add environment variables:
 
    ```bash
    echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
    source ~/.bashrc
    ```
-   
-3. Start poetry and install dependencies:
-   
+
+3. Launch poetry and install dependencies:
    ```bash
    cd /path/to/this/project/on/your/computer
    poetry shell
    poetry install
    ```
-   You will need to start poetry with `poetry shell` before running the program each time.
 
-#### Method 2 - Manually install dependencies (suitable for everyday use):
+Before running the program each time, you need to start poetry with `poetry shell`
+
+#### Method 2 - Manually install dependencies (suitable for daily use):
 
 1. google-generativeai module
-   - If using the Gemini model, this module is required and can be installed with the following command:
+   - If using the Gemini model, install this module with the following command:
      `pip install -q -U google-generativeai`
 2. openai module
-   - If using the ChatGPT model, this module is required and can be installed with the following command:
+   - If using the ChatGPT model, install this module with the following command:
      `pip install openai`
 
-### Step Three: Add Linux Custom Command
+### Step 3: Add Linux Custom Command
 
 1. Execute the following command in the Linux terminal to open the file:
    `nano ~/.bashrc`
-2. Add a custom command at the end of the file:
-   `alias aicmd="python3 /path/to/LaphaeLaicmd-linux/main.py"`
-3. Apply the changes with the following command: `source ~/.bashrc`
+2. Add the custom command at the end of the file:
+   `alias aicmd="python3 /path/to/this/program/LaphaeLaicmd-linux/main.py"`
+3. Run the following command to apply the changes:
+   `source ~/.bashrc`
 
-### Step Four: Set Up API
+### Step 4: Launch
 
-Open the file in the project [data/AI_settings.toml](data/AI_settings.toml)
+- Launch the program by typing `aicmd` in the terminal
+- The first launch requires entering the API key
+- Ensure your network environment can connect to the AI
+
+## 🔧Setting Up AI
+
+Open the `~/.config/LaphaeLaicmd/data/AI_settings.toml` file (generated after the program runs for the first time)
 
 - Change `[prompt](text)` and `[custom_instruct](text)` to modify the prompts
-- Change `[info](select_ai)` to switch the AI type (default is ChatGPT)
-- Change `[info.your-select-ai](api_key)` to set the API key **(required)**
-- Change `[info.your-select-ai](model)` to switch the AI model (default is gpt-4o)
+- Change `[info](select_ai)` to modify the AI type (default is ChatGPT, Gemini is also supported)
+- Change `[info_your-select-ai](api_key)` to set the API key **(must be filled)**
+- Change `[info_your-select-ai](model)` to change the AI model (default is gpt-4)
 
-### Step Five: Start
-
-- Enter `aicmd` in the terminal to start the program
-- Ensure your network can connect to the AI
-
-## Usage Tutorial
+## 💡Usage Tutorial
 
 - After entering your request, it is automatically sent to the AI
 - If the AI's reply contains Linux commands, user confirmation is required with `[Y/n]` (pressing Enter also executes)
@@ -114,7 +116,7 @@ Open the file in the project [data/AI_settings.toml](data/AI_settings.toml)
   - Manually execute a command, e.g., **"example"**:  
     `/cmd example`
 
-## Known Issues
+## 🐛Known Issues
 
 - None
 

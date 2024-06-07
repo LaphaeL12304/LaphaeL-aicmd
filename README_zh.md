@@ -4,9 +4,9 @@
 
 ---
 
-# [Click me to see English version](README.md)
+# [📄Click me to see English version](README.md)
 
-## 它有什么用？
+## ✨它有什么用？
 
 - 在Linux终端输入`aicmd`即可启动
 - 自动捕获AI响应中的Linux命令
@@ -17,11 +17,11 @@
 
 ---
 
-## V1.2.3更新内容
+## 🎉V1.2.3更新内容
 
 1. 支持多语言 (目前仅简中和英文)
 2. 增加`locales`文件
-3. 将配置信息移动到`~/.resources`文件夹
+3. 将配置信息移动到`~/.config`文件夹
 4. 项目更名为`LaphaeL-aicmd`
 5. 优化当输入`/help`时打印的帮助文档
 6. 优化通过poetry与nix的使用 (感谢来自[DataEraserC](https://github.com/DataEraserC)贡献的代码)
@@ -33,7 +33,7 @@
 
 ---
 
-## 如何开始
+## 🚀如何开始
 
 ### 第一步：下载程序
 
@@ -80,21 +80,22 @@
 3. 运行以下命令以应用更改：
    `source ~/.bashrc`
 
-### 第四步：设置API
-
-打开项目中的[data/AI_settings.toml](data/AI_settings.toml)文件
-
-- 更改`[prompt](text)`与`[custom_instruct](text)`以更改提示词
-- 更改`[info](select_ai)`以更改使用的AI类别 (默认为ChatGPT)
-- 更改`[info.your-select-ai](api_key)`以设置API密钥 **(必须)**
-- 更改`[info.your-select-ai](model)`以更换AI模型 (默认为gpt-4o)
-
-### 第五步：启动
+### 第四步：启动
 
 - 从终端输入`aicmd`即可启动程序
+- 首次启动需要输入API key
 - 请确保你的网络环境可以连接到AI
 
-## 使用教程
+## 🔧设置AI
+
+打开`~/.config/LaphaeLaicmd/data/AI_settings.toml`文件 (程序首次运行后才会生成)
+
+- 更改`[prompt](text)`与`[custom_instruct](text)`以更改提示词
+- 更改`[info](select_ai)`以更改使用的AI类别 (默认为ChatGPT，另支持Gemini)
+- 更改`[info_your-select-ai](api_key)`以设置API密钥 **(必须填写)**
+- 更改`[info_your-select-ai](model)`以更换AI模型 (默认为gpt-4o)
+
+## 💡使用教程
 
 - 输入你的需求后自动发送给AI
 - AI的回复如果带着Linux命令，则需要用户进行`[Y/n]`确认 (直接回车也会执行)
@@ -115,7 +116,7 @@
   - 手动执行某命令，e.g. **"example"**：  
     `/cmd example`
 
-## 已知问题
+## 🐛已知问题
 
 - 暂无
 
