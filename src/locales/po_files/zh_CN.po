@@ -6,9 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: LaphaeLaicmd-linux v1.2.3\n"
-"Report-Msgid-Bugs-To: https://github.com/LaphaeL12304/LaphaeL-aicmd/"
-"issues\n"
-"POT-Creation-Date: 2024-06-02 03:21+0800\n"
+"Report-Msgid-Bugs-To: https://github.com/LaphaeL12304/LaphaeL-aicmd/issues\n"
+"POT-Creation-Date: 2024-06-07 15:03+0800\n"
 "PO-Revision-Date: 2024-06-02 03:39+0800\n"
 "Last-Translator: LaphaeL <laphael12304@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -17,128 +16,136 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: main.py:41
-msgid "Initializing..."
-msgstr "初始化程序..."
-
-#: main.py:44
-msgid "Getting system information..."
-msgstr "获取系统信息..."
-
-#: main.py:53
-msgid "Getting configurations..."
-msgstr "获取配置文件..."
-
-#: main.py:56
-msgid "'instruct_prompt' is empty"
-msgstr "'instruct_prompt'文件为空"
-
-#: main.py:61
+#: src/interact_AI.py:244
 msgid "Connecting to"
 msgstr "正在连接到"
 
-#: main.py:70
+#: src/interact_AI.py:253
 msgid "'ready'"
 msgstr "准备就绪"
 
-#: main.py:77
+#: src/interact_AI.py:266 src/interact_AI.py:277
 msgid "Failed to obtain AI class: "
-msgstr "获取AI类失败"
+msgstr "获取AI类失败："
 
-#: main.py:80
-msgid "Failed to connect to"
-msgstr "无法连接到"
+#: src/interact_AI.py:266
+msgid "Invalid AI class."
+msgstr "无效的AI类。"
 
-#: main.py:84
-msgid "Connection successed!"
-msgstr "连接成功！"
+#: src/interact_AI.py:267 src/interact_AI.py:284 src/interact_AI.py:297
+msgid "Try another AI module? "
+msgstr "更换AI模型？"
 
-#: main.py:84
-msgid "have understood the instructions!"
-msgstr "已理解需求！"
-
-#: main.py:85
-msgid "is now ready!"
-msgstr "已就绪！"
-
-#: match_instruct.py:32
+#: src/interact_AI.py:274 src/interact_AI.py:291 src/interact_AI.py:304
+#: src/match_instruct.py:32
 msgid "Exitting program..."
 msgstr "正在退出程序..."
 
-#: match_instruct.py:39
-msgid ""
-"\n"
-"What is this program:\n"
-"This program is named \"LaphaeLaicmd-linux\", it enables chat AI to execute "
-"commands on linux with feedback-loop for multi-step missions.\n"
-"This program is released under GNU v3, you may see \"LICENSE\" file to see "
-"more informations.\n"
-"\n"
-"Usage tutorial:\n"
-"- Enter \"aicmd\" in linux terminal to start this program.\n"
-"- You may edit \"data/AI_settings.toml\" to set API and select AI model "
-"(Setting API is required).\n"
-"- Since the program starts, you may type to chat with the AI (e.g., \"Please "
-"help me install chrome\").\n"
-"- Request from AI may include linux shell command, which require user's "
-"\"[Y/n]\" confirm to execute (Press Enter will also execute).\n"
-"- You may type text starting with \"/\" to use program instructions.\n"
-"\n"
-"Program instructions:\n"
-"These instructions can be run by entering the following commands after the "
-"program starts.\n"
-"\"/help\" : Print help text.\n"
-"\"/exit\" : Exit \"aicmd\" program.\n"
-"\"/content\" : This will print the content to be appended to the AI in the "
-"next request, including the user's manually executed commands and the system's "
-"output.\n"
-"\"/clear\" : This will clear the content to be appended to the AI (Only clear "
-"new contents, chat history won't be cleared).\n"
-"\"/cmd\" : This will manually execute the linux shell command following it, "
-"e.g., \"/cmd whoami\" will execute \"whoami\".\n"
-"\n"
-"To see more informations, you may visit the following links:\n"
-"Github repository: https://github.com/LaphaeL12304/LaphaeL-aicmd\n"
-msgstr ""
-"\n"
-"这个程序是什么：\n"
-"这个程序名为\"LaphaeLaicmd-linux\"，它能让聊天AI在Linux上执行命令，并通过反馈循环处理多步骤任务。\n"
-"此程序在GNU v3许可下发布，您可以查看\"LICENSE\"文件了解更多信息。\n"
-"\n"
-"使用教程：\n"
-"- 在Linux终端输入\"aicmd\"来启动此程序。\n"
-"- 您可以编辑\"data/AI_settings.toml\"来设置API并选择AI模型（需要设置API）。\n"
-"- 程序启动后，您可以输入文字与AI聊天（例如，\"请帮我安装chrome\"）。\n"
-"- AI的请求可能包括Linux shell命令，需要用户的\"[Y/n]\"确认来执行（按回车也会执行）。\n"
-"- 您可以输入以\"/\"开头的文字来使用程序指令。\n"
-"\n"
-"程序指令：\n"
-"程序启动后，输入以下命令可以运行这些指令。\n"
-"\"/help\"：打印帮助文本。\n"
-"\"/exit\"：退出\"aicmd\"程序。\n"
-"\"/content\"：将打印在下一个请求中附加到AI的内容，包括用户手动执行的命令和系统的输出。\n"
-"\"/clear\"：将清除要附加到AI的内容（只清除新内容，聊天历史不会被清除）。\n"
-"\"/cmd\"：将手动执行其后的Linux shell命令，例如，\"/cmd whoami\"将执行\"whoami\"。\n"
-"\n"
-"要了解更多信息，您可以访问以下链接：\n"
-"Github仓库：https://github.com/LaphaeL12304/LaphaeL-aicmd\n"
+#: src/interact_AI.py:278
+msgid "Please check if your API key is valid."
+msgstr "请检查你的API key是否有效。"
 
-#: match_instruct.py:40
+#: src/interact_AI.py:279
+msgid "Try another API key? "
+msgstr "更换API key？"
+
+#: src/interact_AI.py:295
+msgid "Failed to connect to"
+msgstr "无法连接到"
+
+#: src/interact_AI.py:296
+msgid "Please check if your API key, network, and AI module are valid."
+msgstr "请检查你的API key，网络环境，以及AI模型是否有效。"
+
+#: src/interact_AI.py:308
+msgid "Connection successed!"
+msgstr "连接成功！"
+
+#: src/interact_AI.py:308
+msgid "have understood the instructions!"
+msgstr "已理解需求！"
+
+#: src/main.py:44
+msgid "is now ready!"
+msgstr "已就绪！"
+
+#: src/config.py:236
+msgid "Please enter your API key for "
+msgstr "请输入此模型的API key"
+
+#: src/config.py:241
+msgid "API key updated"
+msgstr "API key已更新"
+
+#: src/config.py:247
+msgid "Supported classes: "
+msgstr "支持的类："
+
+#: src/config.py:248
+msgid "Please enter your selected AI class: "
+msgstr "请输入你选择的AI类："
+
+#: src/config.py:253
+msgid "No such AI class. Please try again."
+msgstr "没有这个AI类。请重试。"
+
+#: src/config.py:256
+msgid "AI class updated"
+msgstr "AI类已更新"
+
+#: src/config.py:265
+msgid "Supported model: "
+msgstr "支持的模型："
+
+#: src/config.py:266
+msgid "Please enter your selected AI model for "
+msgstr "请输入你选择的此AI类的AI模型："
+
+#: src/config.py:272
+msgid "No such AI model. Please try again."
+msgstr "没有这个AI模型，请重试。"
+
+#: src/config.py:275
+msgid "AI model updated"
+msgstr "AI模型已更新"
+
+#: src/config.py:296
+msgid "Initializing..."
+msgstr "初始化程序..."
+
+#: src/config.py:299
+msgid "Getting system information..."
+msgstr "获取系统信息..."
+
+#: src/config.py:307
+msgid "Getting configurations..."
+msgstr "获取配置文件..."
+
+#: src/config.py:309
+msgid "'instruct_prompt' is empty"
+msgstr "'instruct_prompt'文件为空"
+
+#: src/config.py:314
+#, fuzzy
+msgid "Checking AI config..."
+msgstr "获取配置文件..."
+
+#: src/match_instruct.py:39
 msgid "# Omit help text\n"
 msgstr "# 省略帮助文本\n"
 
-#: match_instruct.py:43
+#: src/match_instruct.py:42
 msgid "Here is the content to be sent to AI: \n"
 msgstr "以下是准备发送给AI的内容：\n"
 
-#: match_instruct.py:44
+#: src/match_instruct.py:43
 msgid "# Omit printed content\n"
 msgstr "# 省略打印的发送内容\n"
 
-#: match_instruct.py:48
+#: src/match_instruct.py:47
 msgid "Content is cleared"
 msgstr "内容已清空"
 
-#: match_instruct.py:51
+#: src/match_instruct.py:50
 msgid "No such command, you may enter '/help' for more information"
 msgstr "无效指令，你可以输入'/help'以获取更多信息"
