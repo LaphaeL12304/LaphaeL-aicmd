@@ -44,17 +44,17 @@ None
 
 # 其他信息 - Other informations
 [info]
-select_ai = "ChatGPT" # 目前支持'ChatGPT'和'Gemini' - Currently support 'ChatGPT' and 'Gemini'
+select_ai = "" # 目前支持'ChatGPT'和'Gemini' - Currently support 'ChatGPT' and 'Gemini'
 supported_ai = "ChatGPT,Gemini"
 
 [info_ChatGPT]
 api_key = "" # 更改成你的API - Change to your API key
-model = "gpt-4o" 
+model = "" 
 supported_model = "gpt-4o,gpt-4-turbo,gpt-4,gpt-4-32k,gpt-3.5-turbo-0125,gpt-3.5-turbo-instruct"
 
 
 [info_Gemini]
 api_key = "" # 更改成你的API - Change to your API key
-model = "gemini-pro"
+model = ""
 supported_model = "gemini-pro"
 
