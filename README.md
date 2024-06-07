@@ -83,7 +83,7 @@ Before running the program each time, you need to start poetry with `poetry shel
 ### Step 4: Launch
 
 - Launch the program by typing `aicmd` in the terminal
-- The first launch requires entering the API key
+- The first launch requires entering the API key (Gemini's API key can be obtained free from[Google AI Studio](aistudio.google.com))
 - Ensure your network environment can connect to the AI
 
 ## 🔧Setting Up AI
@@ -93,7 +93,7 @@ Open the `~/.config/LaphaeLaicmd/data/AI_settings.toml` file (generated after th
 - Change `[prompt](text)` and `[custom_instruct](text)` to modify the prompts
 - Change `[info](select_ai)` to modify the AI type (default is ChatGPT, Gemini is also supported)
 - Change `[info_your-select-ai](api_key)` to set the API key **(must be filled)**
-- Change `[info_your-select-ai](model)` to change the AI model (default is gpt-4)
+- Change `[info_your-select-ai](model)` to change the AI model (default is gpt-4o)
 
 ## 💡Usage Tutorial
 
