@@ -65,11 +65,14 @@
 #### 方法2——手动安装依赖 (适合日常使用)：
 
 1. google-generativeai模块
-   - 如果使用Gemini模型，则需要使用这个模块，可以通过以下命令安装：  
+   - 通过以下命令安装：  
      `pip install -q -U google-generativeai`
 2. openai模块
-   - 如果使用ChatGPT模型，则需要使用这个模块，可以通过以下命令安装：  
+   - 通过以下命令安装：  
      `pip install openai`
+3. toml模块
+   - 通过以下命令安装：
+     `pip install toml`
 
 ### 第三步：添加Linux自定义命令
 
