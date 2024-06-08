@@ -65,11 +65,14 @@ Before running the program each time, you need to start poetry with `poetry shel
 #### Method 2 - Manually install dependencies (suitable for daily use):
 
 1. google-generativeai module
-   - If using the Gemini model, install this module with the following command:
+   - Install this module with the following command:
      `pip install -q -U google-generativeai`
 2. openai module
-   - If using the ChatGPT model, install this module with the following command:
+   - Install this module with the following command:
      `pip install openai`
+3. toml module
+   - Install this module with the following command:
+     `pip install toml`
 
 ### Step 3: Add Linux Custom Command
 
